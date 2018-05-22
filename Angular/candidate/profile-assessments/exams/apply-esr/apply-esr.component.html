@@ -1,0 +1,81 @@
+﻿<!-- ESR Popup -->
+<div class="modal fade in" id="ESRPop" role="dialog">
+    <div class="modal-dialog ">
+        <div class="modal-content login-screen signUp">
+            <a class="boxclose" data-dismiss="modal" id="boxclose" (click)="refreshExamSection()">×</a>
+            <div class="modal-body content">
+                <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+
+                <!----><table class="table table-hover table-condensed" id="cart" *ngIf="!isLoading">
+                    <thead *ngIf="responseMessage else activateESR ">
+                        <tr><th colspan="2" class="response">{{responseMessage}}</th></tr>
+                    </thead>
+                    <ng-template #activateESR>
+                        <thead>
+                            <tr>
+                                <th colspan="2">To obtain your Enhanced Score Report select one of the following:</th>
+                            </tr>
+                        </thead>
+                        <tbody class="shopping-cart-details">
+                            <!---->
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-6">Enter an activation code:</div>
+                                        <div class="col-sm-5">
+                                            <input type="text" placeholder="Enter Activation Code" [(ngModel)]="activationCode" class="col-sm-12 activationcode">
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-value">
+                                    <a href="javascript:void(0);" class="button-primary pull-right" data-toggle="modal" data-target="#confirmationModel" (click)="applyCode()">apply</a>
+
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="row">
+                                        <div class="col-sm-6">Purchase an activation code:</div>
+                                        <div class="col-sm-5">
+
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-value"><a class="button-primary pull-right" href="{{esrProductPurchaseURL}}">Purchase </a></td>
+                            </tr>
+                        </tbody>
+                    </ng-template>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2" align="center">
+                                <a class="button-primary" data-dismiss="modal" id="boxclose" (click)="refreshExamSection()">{{responseMessage? "OK":"Cancel"}} </a>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!---->
+        </div>
+
+    </div>
+</div>
+<!-- ESR Popup -->
+
+
+<div class="modal fade" id="confirmationModel" role="dialog">
+    <div class="modal-dialog login-container">
+        <div class="modal-content login-screen signUp">
+            <a class="boxclose" id="boxclose" data-dismiss="modal">&times;</a>
+            <div class="modal-body content">
+                <div class="row">
+                    <div class="col-md-11 col-xs-10">
+                        <p>{{activationCode?confirmationMessage:alertMessage}}</p>
+                    </div>
+                </div>
+                <div class="grid-button-row">
+                    <a class="button-primary bt-margin pull-right" data-dismiss="modal" id="boxclose">{{activationCode?"Cancel":"OK"}}</a>
+                    <a *ngIf="activationCode" class="button-primary bt-margin pull-right" data-dismiss="modal" id="boxOk" (click)="processESRCode()">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

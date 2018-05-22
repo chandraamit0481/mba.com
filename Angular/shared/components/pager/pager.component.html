@@ -1,0 +1,19 @@
+﻿<div class="col-lg-12" *ngIf="totalItems > 0 && pager?.pages?.length > 1">
+    <ul class="pagination">
+        <li [class]="[pager.currentPage == 1 ? 'arrow prev disabled':'arrow prev']">
+            <a (click)="setPage(1)">First</a>
+        </li>
+        <li [class]="[pager.currentPage == 1 ? 'arrow prev disabled':'arrow prev']">
+            <a (click)="prev()">Prev</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [class]="[pager.currentPage == page ? 'page-number active':'page-number']">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [class]="[pager.currentPage == pager.totalPages ? 'arrow next enabled-arrow disabled':'arrow next enabled-arrow']">
+            <a (click)="next()">Next</a>
+        </li>&nbsp;
+        <li [class]="[pager.currentPage == pager.totalPages ? 'arrow next enabled-arrow disabled':'arrow next enabled-arrow']">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,16 @@
+﻿<div class="articles clearfix col-md-12">
+    <h2>GMAT Preparation <view-saved linkText="view purchased" cssName="viewsaved pull-right"></view-saved><a href="/frequently-asked-questions" class="viewsaved pull-right" role="link">Faq</a><cart-icon></cart-icon></h2>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+        <div class="item-container">
+            <div class="col-md-3">
+                <ul class="topics" role="navigation">
+                    <li *ngFor="let section of testSection">
+                        <a [ngClass]="section==selectedTopic ? 'topic-view selected':'topic-view'" (click)="updateProductList(section)" href="javascript:void(0);">{{section}}</a>
+
+                    </li>
+
+                </ul>
+            </div>
+            <product-listing [selectedTopic]="selectedTopic" [configKey]="configKey"></product-listing>
+        </div>
+    </div>

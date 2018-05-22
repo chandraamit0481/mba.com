@@ -1,0 +1,67 @@
+﻿<h2 *ngIf="configKey=='allProductPurchaseConfig'">All Purchased Products</h2>
+<h3 *ngIf="configKey=='productPurchaseConfig'">
+    products
+    <a href="javascript:void(0);" class="viewsaved" routerLink="/candidate-profile/products" role="link" *ngIf="productPurchase?.length">view all purchased</a>
+</h3>
+<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<div class="item-container col-md-12" *ngIf="showGmatPrepLink">
+    <article>
+        <div class="content-container">
+            <h1 class="headline">
+                GMAT&reg; Official Prep
+            </h1>
+            <div class="row product-data">
+                <div class="col-md-12 col-sm-12 col-xs-12"> Starter Kit + Practice Exams 1 &amp; 2 is free for all registered mba.com users. Additional exams and question packs require activation code, displayed below.</div>
+            </div>
+            <div class="grid-button-row">
+                <button class="button-primary pull-left" (click)="navigateToGmatPrep()">ACCESS GMAT OFFICIAL PREP</button>
+            </div>
+        </div>
+    </article>
+</div>
+<div class="articles-wrap item-container col-md-12" *ngIf="productPurchase?.length">
+    <ol class="items">
+        <li *ngFor="let item of productPurchase" [class]="[isProfile==true ? 'cp-dash-event':'']">
+            <article>
+                <div class="content-container">
+                    <h1 class="headline">
+                        {{item.title}}
+                    </h1>
+                    <h4 class="format" id="productFormat">FORMAT: {{item.productFormatText}}</h4>
+                    <div class="row product-data">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Order#: </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6" id="productOrderId"> {{item.orderId}} </div>
+                    </div>
+                    <div class="row product-data">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Quantity Purchased:</div>
+                        <div class="col-md-6 col-sm-6 col-xs-6" id="purchaseQuantity"> {{item.purchaseQuantity}}</div>
+                    </div>
+                    <div class="row product-data">
+                        <div class="col-md-6 col-sm-6 col-xs-6">Purchased Date: </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6" id="orderDate"> {{item.orderDate | dateFormat}}</div>
+                    </div>
+
+                    <div class="row product-data" *ngIf="item.productActivationCode && !item.appoinmentId && (item.isDigital||item.isNotActivated)">
+                        <div class="col-md-12 col-sm-12 col-xs-12">Activation Code: </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12" id="activationCode"> {{item.productActivationCode}}</div>
+                    </div>
+                    <div class="row product-data" *ngIf="item.appoinmentId && !item.isNotActivated">
+                        <div class="col-md-12 col-sm-12 col-xs-12">Activated for Appointment ID: </div>
+                        <div class="col-md-12 col-sm-12 col-xs-12"> {{item.appoinmentId}}</div>
+                    </div>
+                    
+                    <div class="grid-button-row">
+                        <button class="button-primary pull-left" *ngIf="item.productDownloadLink && item.isDigital && !showPrepLink(item.sku)" (click)="download(item.productDownloadLink)">Download</button>
+                        <button class="button-primary pull-left" *ngIf="item.productFormatText!='Voucher' && showPrepLink(item.sku)" (click)="navigateToGmatPrep()">ACCESS</button>
+                        <button class="button-primary pull-left" routerLink="/candidate-profile/exams" *ngIf="item.productActivationCode && item.isNotActivated"> Activate</button>
+                        <a (click)="redirectPage(item.itemUrl)" href="javascript:void(0)" class="viewsaved" role="link" *ngIf="item.itemUrl">View Details</a>
+                    </div>                   
+                </div>
+            </article>
+        </li>
+    </ol>
+</div>
+<span>{{noPurchasedProduct}}</span>
+<div *ngIf="configKey=='allProductPurchaseConfig' && isCandidateHomeVisible" class="row grid-button-row">
+    <button class="button-link pull-right" routerLink="/candidate-profile" role="link">&lt; Back to Candidate Home</button>
+</div>

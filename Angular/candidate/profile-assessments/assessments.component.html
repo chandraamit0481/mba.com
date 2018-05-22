@@ -1,0 +1,37 @@
+﻿<!--Assesments -->
+<div class="assesments-part col-md-12 ">
+    <h2>{{profileLabels?.examHeaderText}}</h2>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div class="clearfix" *ngIf="!isLoading">
+        <h3>{{profileLabels?.pastExamHeaderText}}</h3>
+        <div *ngIf="model?.pastExam.length>0;else noAssessmentPast">
+            <exams [model]="model?.pastExam" [isPast]="true" [pastLatestExamId]="model?.latestPastActiveExamId"></exams>
+        </div>
+    </div>
+    <ng-template #noAssessmentPast>
+        {{profileLabels?.noAssessmentFoundTextPast}}
+        <br /><br />
+    </ng-template>
+    <div class="clearfix" *ngIf="!isLoading">
+        <h3>{{profileLabels?.futureExamHeaderText}}</h3>
+        <div *ngIf="model?.futureExam.length>0;else noAssessmentFuture">
+            <exams [model]="model?.futureExam"></exams>
+        </div>
+    </div>
+    <ng-template #noAssessmentFuture>
+        {{profileLabels?.noAssessmentFoundTextFuture}}
+    </ng-template>
+    <div class="row grid-button-row m-button btn-group hr-rule" *ngIf="!isLoading">
+        <button class="button-primary pull-left" (click)="redirectPage(assessmentUrl)"> {{registerButtonText}} </button>
+        <div *ngIf="model?.pastExam?.length>0 || model?.futureExam?.length>0">
+            <button class="button-primary bt-margin pull-left" (click)="navigateReportUrl()"> {{profileLabels?.viewOfficialScoresButtonText}}</button>
+            <button class="button-primary bt-margin pull-left" (click)="navigateToPearsonVUE()"> {{profileLabels?.orderScoreButtonText}} </button>
+            <button *ngIf="connectlinkUrl" class="button-primary bt-margin pull-left" (click)="navigateToGMATConnect()">{{profileLabels?.unlockProgramButtonText}}</button>
+            <button class="button-link pull-right linkall top15" [routerLink]="['/candidate-profile']" *ngIf="!isProfile;else profile"> &lt; {{profileLabels?.backButtonText}}</button>
+            <ng-template #profile>
+                <button class="button-link pull-right linkall" [routerLink]="['/candidate-profile/exams']"> {{profileLabels?.seeAllAssessmentsLinkText}}> </button>
+            </ng-template>
+        </div>
+    </div>
+</div>
+<!--Assesments HTMLs Over-->

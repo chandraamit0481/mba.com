@@ -1,0 +1,38 @@
+﻿<div class="subheader">
+    <div class="container">
+        <div class="col-md-6 pull-right"><a href="{{ocpFaqUrl}}">FAQ</a><a href="{{ocpContactUsUrl}}">Help</a><a href="{{ocpAccountUrl}}">Account</a><cart-icon></cart-icon></div>
+    </div>
+</div>
+<div class="container">
+    <loader-component [loading]="isLoading" [errored]="errored" class="center"></loader-component>
+    <div class=" articles">
+        <div class=" item-container clearfix col-md-12">
+            <ol class="items">
+                <li  *ngFor="let ocpProduct of ocpStoreListing" >
+                    <article>
+                        <figure> <img *ngIf="ocpProduct.productImageURL" src="{{ocpProduct.productImageURL}}" alt="{{ocpProduct.productThumbImageAltText}}"> </figure>
+                        <div class="content-container">
+                            <h1 class="headline"> <a id="ember{{ocpProduct.productId}}" href={{ocpProduct.productItemUrl}} class="topic-view" title="{{ocpProduct.productTitle}}">{{ocpProduct.productTitle}}</a> </h1>
+                            <div class="byline">Format: {{ocpProduct.productFormat}}</div>
+                            <div class="content" [innerHTML] ="ocpProduct.productCaption"></div>
+                            <div class="priceWrap">                                
+                                    <span class="priceThrough" *ngIf="ocpProduct?.productOnSale && ocpProduct?.productDiscountedPrice">{{ocpProduct?.productDiscountedPrice | currencyFormat }}</span>
+                                    <span class="price" *ngIf="ocpProduct?.productPrice!=null else noProductAvailable">{{ ocpProduct?.productPrice | currencyFormat }}</span>
+                                <ng-template #noProductAvailable>
+                                    <no-product-available></no-product-available>
+                                </ng-template>
+                                    <br>
+                                    <br>
+                                    <br>                               
+                            </div>
+                            <div class=""> 
+                                <product-select-button *ngIf="ocpProduct?.productPrice!=null" [product]="ocpProduct"></product-select-button>
+                            </div>
+                        </div>
+                    </article>
+                </li>               
+            </ol>
+        </div>
+    </div>
+    <shopping-cart></shopping-cart>
+</div>

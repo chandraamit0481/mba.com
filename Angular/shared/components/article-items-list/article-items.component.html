@@ -1,0 +1,51 @@
+﻿<div [ngClass]="config.containerClass">
+    <div class="item-controls">
+        <div class="left">
+            <button [ngClass]="config.sort=='score desc' ? 'sort-highlighted':''" (click)="relevance()" role="button" *ngIf="config.showSorting">
+                By Relevance
+            </button>
+            <button [ngClass]="config.sort=='publishDate desc' ? 'sort-highlighted':''" (click)="latest()" role="button" *ngIf="config.showSorting">
+                Latest
+            </button>
+
+            <input type="text" *ngIf="isVisible" [(ngModel)]="searchText" (keyup.enter)="toggleSearch()" placeholder="Search Article" class="search-article" />
+            <svg id="search-icon" class="search-icon1 done" width="30px" height="31px" viewBox="1063 29 30 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                 *ngIf="config.showSearch" (click)="toggleSearch()">
+                <g id="icon-search" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(1063.000000, 29.000000)">
+                    <rect id="icon-background" fill="#eaeaec" x="0" y="0" width="30" height="30" rx="15"></rect>
+                    <path d="M16.1109096,18.1315474 L19.9241362,21.944774 C20.5101717,22.5308095 21.4528937,22.5264685 22.0370244,21.9423378 L21.9423378,22.0370244 C22.5313462,21.448016 22.5275592,20.5069214 21.944774,19.9241362 L18.1315474,16.1109096 C18.6826489,15.2037949 19,14.1389581 19,13 C19,9.6862915 16.3137085,7 13,7 C9.6862915,7 7,9.6862915 7,13 C7,16.3137085 9.6862915,19 13,19 C14.1389581,19 15.2037949,18.6826489 16.1109096,18.1315474 Z M9.4,13 C9.4,11.0117749 11.0117749,9.4 13,9.4 C14.9882251,9.4 16.6,11.0117749 16.6,13 C16.6,14.9882251 14.9882251,16.6 13,16.6 C11.0117749,16.6 9.4,14.9882251 9.4,13 Z" id="icon-shape" fill="#3c3737"></path>
+                </g>
+            </svg>
+        </div>
+    </div>
+    <div class="has-error" *ngIf="(!articleItems || articleItems?.length === 0) && !isLoading && errorText">
+        <div class="control-label">
+            {{(siteCoreConfig?.notificationMessage) ?siteCoreConfig?.notificationMessage:"No results found for"}} {{this.errorText}}
+        </div>
+    </div>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <ol *ngIf="articleItems && !isLoading" [class]="[config.column == 4 ? 'articleItem':'items']">
+        <li *ngFor="let item of articleItems">
+            <article>
+                <figure>
+                    <img src="{{item.fields?.thumbnailImageUrl?.value}}" alt="{{item.fields?.title?.value}}">
+                </figure>
+                <div class="content-container">
+                    <h1 class="headline">
+                        <a id="ember{{item.fields?.itemId?.value}}" href="{{item.fields?.itemUrl?.value}}" class="topic-view">{{item.fields?.title?.value}}</a>
+                    </h1>
+                    <div class="byline">
+                        <time>
+                            {{item.fields?.publishDate?.value | dateFormat}}
+                        </time>
+                        <br>
+                        {{item.fields?.authorName?.value}}
+                    </div>
+                </div>
+            </article>
+        </li>
+    </ol>
+
+    <!-- Use below html for pagination -->
+    <pager (emitMethod)="refreshPaging($event)" [totalItems]="totalItems" [rows]="rows" *ngIf="config.pagination" [currentPage]="config.page"></pager>
+</div>

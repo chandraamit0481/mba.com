@@ -1,0 +1,26 @@
+﻿<div class="saved-program-wrap col-md-12" *ngIf="accommodationData">
+    <h2> Accommodation Requests</h2>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div class="col-md-12">
+        <div class="row program-grid-heading">
+            <div class="col-md-4 col-xs-4">Request Date</div>
+            <div class="col-md-8 col-xs-8">Request Status</div>
+
+        </div>
+        <div class="row content-wrap" *ngFor="let item of accommodationData ">
+            <div class="col-md-4 col-xs-4 ">
+                {{item.date | dateFormat}}
+
+            </div>
+            <div class="col-md-8 col-xs-8 event-title">
+                {{item.messsage}}
+            </div>
+
+        </div>
+
+        <div class="row grid-button-row m-button">
+            <a class="button-link pull-right" role="link" href="{{accommodationLink}}" *ngIf="accommodationLink"> {{accommodationLinkText}}</a>
+        </div>
+
+    </div>
+</div>

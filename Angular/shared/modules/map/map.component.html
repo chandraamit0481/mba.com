@@ -1,0 +1,10 @@
+﻿<div *ngIf="showMap">
+    <div *ngIf="isChina ; else notChinaBlock">
+        <baidu-map ak="baiduMapKey" [options]="opts" [offline]="offlineOpts" (onMapLoaded)="loadMap($event)" (onMarkerClicked)="clickMarker($event)" (onClicked)="clickmap($event)"></baidu-map>
+    </div>
+    <ng-template #notChinaBlock>
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" >
+            <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+        </agm-map>
+    </ng-template>
+</div>

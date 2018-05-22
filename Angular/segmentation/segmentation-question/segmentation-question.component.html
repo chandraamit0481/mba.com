@@ -1,0 +1,32 @@
+﻿<div class="survey-group">
+    <div class="Q">
+        <div class="context">
+            <ng-content select="[header]"></ng-content>
+            {{model?.questionText}}
+        </div>
+        <form novalidate (ngSubmit)="save()" [formGroup]="segmentForm">
+            <div class="title">
+                <div class="motivation"></div>
+                <div class="fit least">Least<span> Describes</span></div>
+                <div class="fit best">Best<span> Describes</span></div>
+            </div>
+            <div class="survey-row" *ngFor="let option of model?.options">
+                <div class="motivation">{{option?.text}}</div>
+                <label>
+                    <input type="radio" [value]="option?.value" [attr.name]="model?.leastId" [formControlName]="model?.leastId">
+                </label>
+                <label>
+                    <input type="radio" [value]="option?.value" [attr.name]="model?.bestId" [formControlName]="model?.bestId">
+                </label>
+            </div>
+
+            <div class="motivation tt-error">
+                {{errorMessage}}
+            </div>
+            <div class="button-container">
+                <button type="submit" class="btn btn-success btn-sm">{{pageText?.btnNextText}}</button>
+            </div>
+            <ng-content select="[footer]"></ng-content>
+        </form>
+    </div>
+</div>

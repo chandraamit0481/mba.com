@@ -1,0 +1,5 @@
+﻿<h4 class="save" *ngIf="isTopInfo">{{savedId?"Saved":"Save"}}</h4>
+<div>
+    <a (click)="clickOnSave()" [ngClass]="{'saveicon': savedId,'unsaveicon':!savedId}" href="javascript:void(0);"></a>
+    <span *ngIf="!isTopInfo" class="savetext">{{savedId?"Saved":"Save"}}</span>
+</div>

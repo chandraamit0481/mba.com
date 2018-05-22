@@ -1,0 +1,21 @@
+﻿export const productDetailSample = {
+    productId: 1234,
+    productDetailDescription: "Some text possible with HTML in it",
+    productAlertMessage: "Some text",
+    productTitle: "The Official Guide for GMAT® Review, 11th Edition",
+    productCaption: "Enhance your Free GMATPrep® software download with even more full-length practice exam featuring 90 new questions. Simulate the Real GMAT test-taking experience, review your progress, and take advantage of enhanced score reporting to develop effective study strategies.",
+    productImage: "/mbaweb/assets/img/productDetail.png",
+    productImageUrl: "/sitecore/content/home/events/admissions-reception",
+    productOnsale: true,
+    productPrice: 23.33,
+    productDiscountedPrice: "$19.33",
+    productMessageBelowPrice: "2 message Below Price",
+    productFormat: "book",
+    productShowAddToCart: true,
+    productAltAddToCartButtonText: "Add to cart",
+    productAltAddToCartButtonLink: "/preparation/download-free-gmatprep-software",
+    productQuantityMaxAllowedInCart: 9,
+    cartMessageBelowAddToCart: "",
+    cartMessageAbovePrice: "",
+    sku: "abcd"
+};

@@ -1,0 +1,53 @@
+
+<div class="matches">
+    <div class="match-titles">
+        <div class="score">Match Rate</div>
+        <div class="program">Program</div>
+        <div class="school">School</div>
+    </div>
+
+    <div *ngIf="matchData && matchData.length === 0">
+        <h1 *ngIf="searchedSchool">{{(siteCoreConfig?.notificationMessage) ?siteCoreConfig.notificationMessage:"No results found for" }} {{searchedSchool}}</h1>
+    </div>
+
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+
+    <div id="match" class="match" *ngFor="let item of matchData;let last = last">
+        <div class="score" [title]="item.matchRateText">
+            <span>{{item.matchRate}}%</span>
+            <img src="/MBAWeb/assets/img/icon-help.png" alt="{{pageConstants.Help}}" />
+        </div>
+        <div class="program">
+            <a href="{{item.itemUrl}}">
+                <span>{{item.programDisplayName}}</span>
+            </a>
+            <span class="length">{{item.programLength}}</span>
+            <span class="school-location">
+                <span *ngIf="item.programCompleteAddress">{{item.programCompleteAddress}}</span>                
+            </span>
+            <save [id]="item.programId" [list]="savedProgramList" [configKey]="'programMatch'"  [isLast]="last"></save>
+        </div>
+        <div class="school">
+            <img *ngIf="item.schoolLogo" src="{{item.schoolLogo}}" alt="{{pageConstants.AltImgText}}" />
+            <span class="college">
+                <a href="{{item.schoolUrl}}"><span>{{item.programSchoolName}}</span></a>
+            </span>
+            <span class="institution">{{item.programInstitutionName}}</span>
+        </div>
+        <div class="additional-info">
+            <div class="gmat-avg">
+                <span class="label">Avg GMAT Score</span>
+                <span>{{item.programGmatScore}}</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Use below html for pagination -->
+<pager (emitMethod)="refreshPaging($event)" [totalItems]="totalItems" [rows]="rows" [currentPage]="pageNumber"></pager>
+<br />
+<div class="col-md-12 clearfix">
+    <div class="alert-p alert-p-info fade in">
+        <p>The information on this page has been provided to us, with permission, by the university, school, or program. If your school is interested in participating, please visit <a href="http://www.gmac.com/schoolfinder">http://www.gmac.com/schoolfinder</a>  </p>
+    </div>
+</div>

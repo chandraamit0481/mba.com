@@ -1,0 +1,25 @@
+﻿<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<!-- score Report -->
+<div class="col-md-12 row-score-report" id="demo">
+    <!--collapse-->
+    <div class="col-md-12 pull-right">
+        <div class="row program-grid-heading">
+            <div class="col-md-3 col-xs-3">University</div>
+            <div class="col-md-3 col-xs-3">School &amp; Program</div>
+            <div class="col-md-3 col-xs-3">Requested Date</div>
+            <div class="col-md-3 col-xs-3">Reported Date</div>
+        </div>
+        <div class="row grid-content" *ngFor="let item of model">
+            <div class="col-md-3 col-sm-3 col-xs-3 exam-wrap">
+                <span class="university">{{item?.universityName}}</span>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3">
+                <span class="schoolname">{{item?.schoolName}}</span>
+                <span>{{item?.programName}}</span>
+                <div>{{item?.programAddress}} </div>
+            </div>
+            <div class="col-md-3 col-sm-3 col-xs-3 status-wrap rquested">{{item?.dateTimeRequested|dateFormat}}</div>
+            <div class="col-md-3 col-sm-3 col-xs-3 status-wrap fulfilled">{{item?.dateTimeFulfilled|dateFormat}}</div>
+        </div>
+    </div>
+</div>

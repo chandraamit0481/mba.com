@@ -1,0 +1,38 @@
+﻿<div class="controls-group">
+    <h6>search events</h6>
+    <div class="control">
+        <div class="control-name">Keyword</div>
+        <input type="text" id="keyword" class="snug-btm" [(ngModel)]="keyword" aria-label="keyword" (change)="setFilterObject()" placeholder="Enter Search Text">
+    </div>
+    <div class="control">
+        <div class="control-name">Format</div>
+        <span *ngFor="let item of classStyleList;let classIndex = index;">
+            <input id="class-style-online-{{classIndex}}" type="checkbox" (change)="setFilterObject()"
+                   [(ngModel)]="classStyleList[classIndex].checked" />
+            <label for="class-style-online-{{classIndex}}">{{item.value}}</label>
+        </span>
+        <div class="control-clear" *ngIf="selectedClassStyleList" (click)="clearPreferences(classStyleList)">Clear</div>
+    </div>
+
+    <div class="control">
+        <div class="control-name">Location</div>
+        <multiselect-dropdown [placeholder]="'Location'" configKey="countries" [selectedItems]="location" [disableLocation]="disableLocation"
+                              (emitMethod)="refreshMultiSelectList($event,'location')"></multiselect-dropdown>
+
+    </div>
+    <div class="control input-group-sm">
+        <div class="control-name ">When</div>
+        <div class="col-md-5">
+            <my-date-picker name="startDate" [options]="myDatePickerOptions" [placeholder]="placeHolder"
+                            [(ngModel)]="startDate" (inputFieldChanged)="onStartInputChanged($event)" (dateChanged)="onStartDateChanged($event)"></my-date-picker>
+        </div>
+
+        <div class="col-md-2 date-align">-</div>
+        <div class="col-md-5">
+            <my-date-picker name="endDate" [options]="myDatePickerOptionsEndDate" [placeholder]="placeHolder"
+                            [(ngModel)]="endDate" (inputFieldChanged)=" onEndInputChanged($event)" (dateChanged)="onEndDateChanged($event)"></my-date-picker>
+        </div>
+    </div>
+    <div class="alert-error clearfix col-md-12" *ngIf="invalidStartDate"> {{invalidStartDate}} </div>
+    <div class="alert-error clearfix col-md-12" *ngIf="invalidEndDate"> {{invalidEndDate}} </div>
+</div>

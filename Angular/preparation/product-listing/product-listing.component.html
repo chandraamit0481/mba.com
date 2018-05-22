@@ -1,0 +1,41 @@
+﻿<div class="item-content-container col-md-9">
+    <div class="item-controls">
+        <div class="left">
+            <a href="javascript:void(0)" class="Links selected" role="link" #allProduct (click)="all()">All</a>
+            <a href="javascript:void(0)"  role="link" #book  (click)="format('book')">Print</a>
+            <a href="javascript:void(0)"  role="link" #online (click)="format('online')">Digital</a>
+        </div>
+    </div>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div *ngIf="!isLoading">
+        <div *ngIf="productListing?.length === 0 && selectedTopic">
+            <h1>{{sitecoreConfig?.notificationMessage}} {{selectedTopic}}</h1>
+        </div>
+        <ol class="items">
+            <li *ngFor="let product of productListing">
+                <article>
+                    <figure>
+                        <img *ngIf="product?.productImageURL" src="{{product?.productImageURL}}" alt="{{product?.productThumbImageAltText}}">
+
+                    </figure>
+                    <div class="content-container">
+                        <h1 class="headline">
+                            <a id="anchorProductItemUrl" href={{product?.productItemUrl}} class="topic-view" title="{{product?.productTitle}}">{{product?.productTitle}}</a>
+                        </h1>
+                        <div class="byline" *ngIf="product?.productFormat">Format: {{product?.productFormat}}</div>
+                        <div class="content" [innerHtml]="product?.productCaption | safeHtml"></div>
+                        <div class="priceWrap">
+                            <span class="priceThrough" *ngIf="product?.productOnSale && product?.productDiscountedPrice">{{product?.productDiscountedPrice | currencyFormat }}</span>
+                            <span class="price" *ngIf="product?.productPrice!=null else noProductAvailable">{{(product?.productPrice) | currencyFormat }}</span>
+                            <ng-template #noProductAvailable>
+                                <no-product-available></no-product-available>
+                            </ng-template>
+
+                        </div>
+                        <product-select-button [product]="product"></product-select-button>
+                    </div>
+                </article>
+            </li>
+        </ol>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+﻿<div class="loader" *ngIf="loading">
+    <img src="/MBAWeb/assets/img/loading-dots.gif" alt="{{pageConstants.Loader}}" />
+</div>
+
+<div class="col-md-12"  *ngIf="errored">
+    <div class="alert alert-error">
+       <h4>An error has occurred</h4>
+    </div>
+</div>

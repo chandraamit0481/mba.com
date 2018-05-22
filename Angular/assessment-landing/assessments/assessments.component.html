@@ -1,0 +1,34 @@
+﻿<div class="col-md-9">
+    <!-- Article Content starts -->
+    <div class="assessmentContent col-md-12">
+
+        <article class="featured-item" *ngFor="let item of assessments">
+            <img alt="{{item?.BannerImage}}" class="art-image" src="{{item?.BannerImage}}">
+            <div class="content-container">
+                <header>
+                    <h1 *ngIf="!item.Logo">{{item?.Title}}</h1>
+                    <figure *ngIf="item?.Logo" class="logoImg"><img src="{{item?.Logo}}" alt="{{item?.Title}}"></figure>
+                    <div class="byline">
+                        {{item?.TagLine}}
+                    </div>
+                </header>
+                <section>
+                    <p>
+                        {{item?.ShortDescription}}
+                    </p>
+                </section>
+
+                <div class="button-row">                    
+                    <a [style.background-color]="item?.ButtonBackgroundColor" class="button-secondary pull-left" href="javascript:void(0);" (click)="registerExam(item?.RegisterUrl)" *ngIf="item?.RegisterUrl!='#'">{{item?.RegisterNowButtonText}}</a>
+                    <a [style.color]="item?.LearnMoreButtonColor" class="button-link" role="link" href="{{item?.ItemUrl}}" *ngIf="item?.ItemUrl">{{item?.LearnMoreButtonText}}</a>
+                </div>
+            </div>
+        </article>
+    </div>
+</div>
+<div class="col-md-3 pull-right-relArticle">
+    <div class="relatedSection" *ngFor="let item of assessments">
+        <h6 class="side-header">related</h6>
+        <related-content configKey="assessmentProfile" [relatedItemIds]="item?.RelatedItems"></related-content>
+    </div>
+</div>

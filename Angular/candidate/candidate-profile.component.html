@@ -1,0 +1,161 @@
+﻿<div class="container">
+
+    <div class="controls col-md-3">
+        <h5>{{profileLabels?.profileHeader}}</h5>
+        <loader-component [loading]="isLoading" [errored]="errored" *ngIf="!model"></loader-component>
+
+        <a href="javascript:void(0);" class="controls-trigger-show button-link" id="show">View Profile</a>
+
+        <div class="controls-container hides">
+            <div class="trigger-container">
+                <a href="javascript:void(0);" class="controls-trigger-hide button-link " id="hide">Hide Profile</a>
+            </div>
+
+            <div class="controls-group" *ngIf="model">
+                <h6>{{profileLabels?.yourInformationHeader}}</h6>
+
+                <div class="Profile-info">
+                    <div id="fill" class="fill" progress-indicator [percent]="model.total"></div>
+                    <img class="mask" alt="{{model.total}}" src="/MBAWeb/assets/img/cp-profile-fill.png" (click)="redirect(pvueProfileUrl)" />
+                    <label>{{model.total}}% Complete</label>
+                    <p>{{profileLabels?.profileInfoMessage}}</p>
+                </div>
+
+                <div class="info-wrap personal-info ">
+                    <h5 (click)="redirect(pvueProfileUrl)"> {{profileLabels?.personalHeader}}</h5>
+                    <p id="fullname">{{model.fullName}}</p>
+                    <p id="pvueEmail">{{model.pvueEmail}}</p>
+                    <p id="fulladdress">{{model.fullAddress}}</p>
+                    <p id="citystate">{{model.cityStateProvince}}</p>
+                    <p id="postalcode">{{model.pvuePostalCode}}</p>
+                    <p id="country">{{model.pvueCountryName}}</p>
+                    <p id="phonenumber">{{model.dayPhoneNumber}}</p>
+                    <p id="cityzenship">{{model.pvueCountryCitizenship}}</p>
+                    <p id="language">{{model.nativeLanguage}}</p>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">GMAT ID :</label>
+                        <div class="col-sm-6 col-xs-6 mail-id" id="gamtid">{{model.gmatid}}</div>
+                    </div>
+                </div>
+
+                <div class="info-wrap login-info">
+                    <h5 (click)="redirect(profilePageUrl)">{{profileLabels?.loginHeader}}</h5>
+                    <p id="email">{{model.email}}</p>
+                    <p><a href="javascript:void(0);" (click)="redirect(changePasswordUrl)">{{profileLabels?.passwordChangeText}}</a></p>
+                </div>
+
+                <div class="info-wrap graduate-school-plan">
+                    <h5 (click)="redirect(pvueProfileUrl)">{{profileLabels?.graduateHeader}}</h5>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Expected Start Date :</label>
+                        <div class="col-sm-6 col-xs-6" id="expectedStartDate">{{model.formattedMBAStartDate=="Undecided"?"-":(model.formattedMBAStartDate| dateFormat)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Preferred Region of  Study :</label>
+                        <div class="col-sm-6 col-xs-6" id="mbaStudyRegions">{{model.mbaWorldStudyRegions}}  </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Degree Sought :</label>
+                        <div class="col-sm-6 col-xs-6" id="mbaDegreePursued">{{model.mbaDegreePursued}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Area of Concentration :</label>
+                        <div class="col-sm-6 col-xs-6" id="mbaAreaOfConcentration">{{model.mbaAreaOfConcentration}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Degree Format :</label>
+                        <div class="col-sm-6 col-xs-6" id="howMBAPursued">{{model.howMBAPursued}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Type of Student :</label>
+                        <div class="col-sm-6 col-xs-6" id="fullOrPartTimeStudent">{{model.fullOrPartTimeStudent}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Work Plan :</label>
+                        <div class="col-sm-6 col-xs-6" id="workFullTimeWhilePursue">{{model.workFullTimeWhilePursue}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6">Desired Post Degree Function :</label>
+                        <div class="col-sm-6 col-xs-6" id="functExpAfterDegree">{{model.functExpAfterDegree}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Desired Post Degree Industry :</label>
+                        <div class="col-sm-6 col-xs-6" id="indExpAfterDegree">{{model.indExpAfterDegree}}</div>
+                    </div>
+                </div>
+
+                <div class="info-wrap work-experience">
+                    <h5 (click)="redirect(pvueProfileUrl)">{{profileLabels?.workHeader}}</h5>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Years of Experience :</label>
+                        <div class="col-sm-6 col-xs-6" id="yearsOfWorkExperience"> {{model.yearsOfWorkExperienceName}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Functional Area :</label>
+                        <div class="col-sm-6 col-xs-6" id="functExpBeforeDegree">{{model.functExpBeforeDegree }}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Industry :</label>
+                        <div class="col-sm-6 col-xs-6" id="indExpBeforeDegree">{{model.indExpBeforeDegree}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Previous Military Experience :</label>
+                        <div class="col-sm-6 col-xs-6" id="militaryService">{{model.militaryService}}</div>
+                    </div>
+                </div>
+
+                <div class="info-wrap previous-degrees">
+                    <h5 (click)="redirect(pvueProfileUrl)">{{profileLabels?.degreesHeader}}</h5>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Highest Level of Education Attained :</label>
+                        <div class="col-sm-6 col-xs-6" id="highestEducationLevel"> {{model.highestEducationLevel}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">School of Undergraduate/<br />First Degree :</label>
+                        <div class="col-sm-6 col-xs-6" id="undergraduateInstitution">{{model.undergraduateInstitution}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Date/<br />Expected Date of Graduation :</label>
+                        <div class="col-sm-6 col-xs-6" id="undergradGraduationDate">{{model.undergradGraduationDate=="-"?"-":(model.undergradGraduationDate| dateFormat)}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">Major/<br />Primary Field of Study :</label>
+                        <div class="col-sm-6 col-xs-6" id="undergraduateMajor">{{model.undergraduateMajor}}</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-6 col-xs-6" for="">GPA :</label>
+                        <div class="col-sm-6 col-xs-6" id="undergradGPA">{{model.undergradGPA}}</div>
+                    </div>
+                </div>
+
+                <div class="info-wrap communication-preferences">
+                    <h5 (click)="redirectCommPref(model.gmatid)">{{profileLabels?.communicationHeader}}</h5>
+                    <div class="form-group">
+                        <label class="control-label col-sm-8 col-xs-6" for="">Connect with schools, scholarship-granting organizations, and strategic partners of GMAC :</label>
+                        <div class="col-sm-4 col-xs-6" id="gmassOptin"> {{model.gmassOptin}}</div>
+                    </div>
+                    <div class="form-group">
+											<label class="control-label col-sm-8 col-xs-6" for="">Subscribe: Financial aid, school recruiting, and other business school offers and information :</label>
+                        <div class="col-sm-4 col-xs-6" id="careerOptin"> {{model.careerOptin}}</div>
+                    </div>
+                    <div class="form-group">
+											<label class="control-label col-sm-8 col-xs-6" for="">Subscribe: The GMAT exam, management education, and other offers and promotions from GMAC :</label>
+                        <div class="col-sm-4 col-xs-6" id="gmatOptin"> {{model.gmatOptin}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="item-content-container col-md-9 articles candidate-profile">
+        <div class="articles-wrap item-container col-md-12">
+            <div class="alert alert-success fade in alert-dismissable" id="refresh-wrap" role="alert" *ngIf="profileUpdMessage">
+                <button class="close" data-dismiss="alert" data-target="#refresh-wrap" type="button" (click)="closeMessageBox()"> <span aria-hidden="true">x</span></button>
+                <p>{{profileUpdMessage}}</p>
+                
+            </div>
+            <!-- right col ------------------------------------------------------------------------------------------------->
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+</div>

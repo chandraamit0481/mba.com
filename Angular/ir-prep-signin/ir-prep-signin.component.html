@@ -1,0 +1,28 @@
+﻿<section id="sign-in-background" class="help-overlay-background"></section>
+<section id="sign-in">
+    <div class="sign-in-content middle-popup">
+        <div class="header">Start answering IR questions</div>
+        <div class="exit" (click)="resetPage()"></div>
+        <div class="divider"></div>
+        <div class="column license">
+            <div class="text">First time access?</div>
+            <div class="text">Enter your license key to get started</div>
+            <div class="input">
+                <input type="text" id="key" [(ngModel)]="licenseKey" />
+            </div>
+            <div class="center">
+                <button class="btn btn-primary" id="activate" (click)="validateKey()">Get started</button>
+            </div>
+            <div class="text error" id="error-div" *ngIf="keyStatus!=keyStatusEnum.Purchased">This code is invalid. Please try again.</div>
+            <div class="text error" id="cust-support" *ngIf="keyStatus!=keyStatusEnum.Purchased">Please contact <a target="_blank" href="{{siteCoreConfig.irPrepContactUs}}">Customer Support.</a></div>
+            <div class="text error" id="store-page" *ngIf="keyStatus!=keyStatusEnum.Purchased && (keyStatus==keyStatusEnum.Activated || keyStatus==keyStatusEnum.Expired)">Please go <a target="_blank" href="{{siteCoreConfig.irPrepBuyNow}}">here</a> to purchase a new code.</div>
+        </div>
+        <div class="column login">
+            <div class="text">Returning user?</div>
+            <div class="text">Click the button to sign in</div>
+            <div class="center">
+                <a class="btn btn-primary" href="{{siteCoreConfig.irPrepSignIn}}/Account/LogOn">Sign in</a>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,14 @@
+﻿
+<h2 *ngIf="configKey=='allSavedArticle'">Saved Article</h2>
+<h3 *ngIf="configKey=='savedArticle'">Articles & Announcements<a href="#" class="viewsaved" role="link" *ngIf="notSavedAnyArticle" [routerLink]="['/candidate-profile/articles']">view all saved</a> </h3>
+<div class="clearfix">{{noArticle}}</div>
+<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<saved-article-content [model]="model?.recentArticle" [isProfile]="isProfile"></saved-article-content>
+<saved-article-content [model]="model?.restArticle"  [isProfile]="isProfile"></saved-article-content>
+
+<div class="row grid-button-row">
+    <button class="button-link pull-right" role="link" [routerLink]="['/candidate-profile']" *ngIf="!isProfile">&lt; {{profileLabels?.backButtonText}}</button>
+</div>
+
+
+

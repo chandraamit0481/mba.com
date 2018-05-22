@@ -1,0 +1,6 @@
+﻿<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<ul class="tags">
+    <li *ngFor="let item of tags">
+        <a href="{{item?.url}}">{{item?.tag}}</a>
+    </li>
+</ul>

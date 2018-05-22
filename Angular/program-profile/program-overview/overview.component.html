@@ -1,0 +1,47 @@
+﻿<div class="col-md-3 side-bar">
+    <div class="col-md-12 side-bar-wrap">
+        <h2> Overview</h2>
+
+        <div class="test">
+            <div class="col-md-12 side-col-wrap">
+                <h1>Admissions</h1>
+                <ul *ngIf="programOverviewData?.programTest ">
+                    <li *ngFor="let testData of programOverviewData.programTest">
+                        <div *ngIf="testData.programTestScoreAverage && testData.programTestScoreAverage?.value!=0">
+                            {{testData.programTestScoreAverage?.value}} - {{testData.programTestIdLookupName?.value}}
+                        </div>
+                    </li>
+                </ul>
+                <ul class="workExperience" *ngIf="programOverviewData?.programWorkExperience">
+                    <li *ngFor="let workExperience of programOverviewData.programWorkExperience">
+                        <div *ngIf="workExperience.programWorkExperienceYears && workExperience.programWorkExperienceYears?.value!=0">
+                            {{workExperience.programWorkExperienceYears?.value}} yrs - {{workExperience.programWorkExperienceTypeIdLookupName?.value}} work experience
+                        </div>
+                    </li>
+                </ul>
+                <ul class="employmentData" *ngIf="programOverviewData?.programEmployment">
+                    <li *ngFor="let employmentData of programOverviewData.programEmployment">{{employmentData.programEmploymentWithinXMonths?.value}}% - Graduates offered employment within {{employmentData.programEmploymentMonths?.value}} months</li>
+                </ul>
+                <ul class="size" *ngIf="programOverviewData?.programSizeAverage">
+                    <li>{{programOverviewData.programSizeAverage}} - Average class size</li>
+                </ul>
+                <ul class="credits" *ngIf="programOverviewData?.programCreditsRequired">
+                    <li>{{programOverviewData.programCreditsRequired}} - Credits required</li>
+                </ul>
+            </div>
+
+        </div>
+        <div class="cost">
+            <div class="col-md-12 side-col-wrap border-bottom-0">
+                <h1>Tuition</h1>
+                <ul class="form-control-static" *ngIf="programOverviewData?.programCost?.length>0">
+                    <li *ngFor="let costData of programOverviewData?.programCost ">{{costData.programCostAmount?.value}} ({{costData.programCostCurrencyIdLookupName?.value}}) - {{costData.programCostPeriodIdLookupName?.value}}; {{costData.programCostCategoryIdLookupName?.value}}</li>
+                </ul>
+
+                <ul class="tutionData" *ngIf="tutionData">
+                    <li *ngFor="let tutionData of tutionData ">{{tutionData}} </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

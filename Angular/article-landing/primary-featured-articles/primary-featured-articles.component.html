@@ -1,0 +1,45 @@
+﻿<!--Header Ended -->
+<div class="container">
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div class="col-lg-12" *ngIf="articles">
+        <h1 class="mainheading" *ngIf="selectedTopic">{{selectedTopic}}</h1>
+        <div class="articles col-md-10">
+            <div class="primary-featured-items">
+                <article class="featured-item">
+                    <img alt="{{articles.primaryArticleOne?.bannerImage}}" class="art-image" src="{{articles.primaryArticleOne?.bannerImageUrl}}">
+                    <div class="content-container">
+                        <header>
+                            <h1> <a href="{{articles.primaryArticleOne?.itemUrl}}">{{articles.primaryArticleOne?.title}}</a></h1>
+                            <div class="byline">
+                                <time>
+                                    {{articles.primaryArticleOne?.publishDate | dateFormat}}
+                                </time>
+                                <span *ngIf="articles.primaryArticleOne?.authorName"> — {{articles.primaryArticleOne.authorName}}</span>
+                            </div>
+                        </header>
+                        <section>
+                            <p class="event-description" [innerHtml]="articles.primaryArticleOne?.description"><br></p>
+                        </section>
+                    </div>
+                </article>
+                <article class="featured-item1">
+                    <img alt="{{articles.primaryArticleTwo?.bannerImage}}" class="art-image" src="{{articles.primaryArticleTwo?.bannerImageUrl}}">
+                    <div class="content-container">
+                        <header>
+                            <h1> <a id="ember2433" href="{{articles.primaryArticleTwo?.itemUrl}}">{{articles.primaryArticleTwo?.title}}</a></h1>
+                            <div class="byline">
+                                <time> {{articles.primaryArticleTwo?.publishDate | dateFormat}}</time>
+                                <span *ngIf="articles.primaryArticleTwo?.authorName"> — {{articles.primaryArticleTwo.authorName}}</span>
+
+                            </div>
+                        </header>
+                        <section>
+                            <p class="event-description" [innerHtml]="articles.primaryArticleTwo?.description"><br></p>
+                        </section>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <app-secondary-featured-articles [secondaryArticle]="articles.secondaryArticle"></app-secondary-featured-articles>
+    </div>
+</div>

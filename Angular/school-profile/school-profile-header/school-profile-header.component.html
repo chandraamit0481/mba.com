@@ -1,0 +1,15 @@
+﻿<header class="jumbotron">
+    <div class="container">
+        <figure *ngIf="schoolHeader?.schoolLogo">
+         <img  src="{{schoolHeader?.schoolLogo}}" alt="{{pageConstants.AltImgText}}">
+        </figure>
+
+        <div class="jumbo-heading">
+            <h1>{{schoolHeader?.schoolDisplayName}}</h1>
+            <h2 *ngIf="schoolHeader?.schoolDisplayName!=schoolHeader?.institutionName">{{schoolHeader?.institutionName}}</h2>
+            <div class="clearfix"></div>
+            <div class="byline">{{address}}<br>{{schoolHeader?.schoolPhoneCountryCode}}{{schoolHeader?.schoolPhoneNumber}} {{schoolHeader?.schoolWebsiteUrl}}</div>
+
+        </div>
+        </div>
+</header>

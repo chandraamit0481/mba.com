@@ -1,0 +1,21 @@
+﻿<div class="col-md-2" *ngIf="secondaryArticleList">
+    <div class="secondary-featured-items">
+        <h2>Featured</h2>
+        <ol>
+            <li class="items1" *ngFor="let item of secondaryArticleList">
+                <article>
+                    <div class="content-container">
+                        <header>
+                            <h1><a id="ember2538" href="{{item.itemUrl}}">{{item.title}}</a></h1>
+                            <div class="byline">
+                                <time>{{item.publishDate | dateFormat}}</time>
+                                <br>
+                            </div>
+                        </header>
+                    </div>
+                </article>
+            </li>
+        </ol>
+    </div>
+</div>
+

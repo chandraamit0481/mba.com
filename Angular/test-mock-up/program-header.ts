@@ -1,0 +1,21 @@
+﻿export const programHeaderSample = {
+    programAreaOfStudyOther: 'Computer Programming',
+    programDisplayName: 'Professional MBA',
+    programWebsiteUrl: 'http://www.tepper.cmu.edu',
+    programAddressLine1: 'Palumbo Donahue School of Business',
+    programAddressLine2: '5000 Frobes Avenue',
+    programAddressLine3: 'Suite 100',
+    programCity: 'Pittsburgh',
+    programPostalCode: '22903',
+    programStateProvinceId: 3000047,
+    programStateProvinceIdLookupName: 'PA',
+    programCountryId: 2000062,
+    programCountryIdLookupName: 'United States',
+    programPhoneCountryCode: '+1',
+    programPhoneNumber: '111-222-3333',
+    programPhoneExtension: 'x456',
+    programLogo: '',
+    programSchoolName: 'School of Business',
+    programInstitutionName: 'Frobes Avenue',
+    programSchoolLogo: ''
+};

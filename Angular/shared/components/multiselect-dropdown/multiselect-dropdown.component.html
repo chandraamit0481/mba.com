@@ -1,0 +1,31 @@
+﻿<div class="dropdown">
+    <span (clickOutside)="onClickedOutside()">
+        <button (click)="showDivSection()" [disabled]="disableLocation" class="btn btn-default dropdown-toggle  power-select-trigger view basic-dropdown-trigger jumptoschool" type="button" id="dropdownMultiselect" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            {{placeholder}}
+        </button>
+        <div class="dropdown-menu" [style.display]="showResult ? 'block' : 'none'">
+            <input (keydown.tab)="hideDivSection()" (keyup.enter)="selected()" aria-label="dropdownAutoComplete" role="combobox" class="power-select-search-input" (keyup)="getData(selectedItem,$event)" loading-text="Loading options.." [(ngModel)]="selectedItem" aria-expanded="true">
+            <span (click)="clearKeyword($event)" *ngIf="selectedItem; else elseBlock " class="form-control-clear glyphicon glyphicon-remove form-control-feedback"></span>
+            <ng-template #elseBlock><span>Type to search</span> </ng-template>
+
+            <div infinite-scroll
+                 ng2-scrollable
+                 [scrollWindow]="false"
+                 (scrolled)="onModelScrollDown()"
+                 class="scrollable section ng2-auto-complete" [style.display]="(!selectedItem) ? 'none' : 'block' ">
+                <span *ngIf="isLoading">Loading Options...</span>
+                <span *ngIf="!isLoading && noRecord">No Record Found</span>
+                <ul #firstLi tabindex="0" (mouseover)="mouseover=true" (mouseout)="mouseover=false">
+                    <li tabindex="{{i+1}}" *ngFor="let school of modelBody;let i=index" [class.selected]="i == 0 && !mouseover" (click)="add(school)" (keyup.enter)="add(school)" (keydown.ArrowDown)="downArrow( $event)" (mouseover)="setCurrentFocous($event)" (mouseout)="removeCurrentClass($event)" (keyup.arrowup)="upArrow( $event)">{{school.value}}</li>
+                </ul>
+            </div>
+
+
+        </div>
+    </span>
+</div>
+<ul class="tags">
+    <li *ngFor="let item of selectedItems">
+        <i class="glyphicon glyphicon-remove-circle" (click)="remove(item)"></i> {{item.value}}
+    </li>
+</ul>

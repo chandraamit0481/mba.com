@@ -1,0 +1,25 @@
+﻿<div *ngIf="programHeader">
+    <header class="jumbotron">
+        <div class="container">
+            <figure>
+                <img *ngIf="programHeader.programLogo;else schoolLogo" src="{{programHeader?.programLogo}}" alt="{{programHeader?.programDisplayName}}">
+                <ng-template #schoolLogo>
+                    <img *ngIf="programHeader?.programSchoolLogo" src="{{programHeader?.programSchoolLogo}}" alt="{{programHeader?.programDisplayName}}">
+                </ng-template>
+            </figure>
+            <div class="jumbo-heading">
+                <h1 role="heading" *ngIf="programHeader?.programDisplayName">{{programHeader.programDisplayName}}</h1>
+                <h4 role="heading" *ngIf="programHeader?.programSchoolName">{{programHeader.programSchoolName}}</h4>
+                <p role="heading" *ngIf="programHeader?.programSchoolName!=programHeader?.programInstitutionName">{{programHeader.programInstitutionName}}</p>
+                <div class="clearfix"></div>
+                <div class="byline">
+                    {{address}}
+                    <div *ngIf="programHeader.programPhoneNumber; else nophone">{{programHeader.programPhoneCountryCode}}{{programHeader.programPhoneNumber}} {{programHeader.programWebsiteUrl}}</div>
+                    <ng-template #nophone>
+                       <div>{{programHeader.programWebsiteUrl}}</div> 
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </header>
+</div>

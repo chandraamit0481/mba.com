@@ -1,0 +1,37 @@
+<div class="container">
+    <!-- Filter Column left -->
+    <div class="controls col-md-3">
+        <h5>{{title}}</h5>
+
+        <a href="javascript:void(0);" class="controls-trigger-show button-link" id="show">Show Controls</a>
+
+        <div class="controls-container hides">
+            <div class="trigger-container">
+                <a href="javascript:void(0);" class="controls-trigger-hide button-link " id="hide">Hide Controls</a>
+            </div>
+            <about-text-component></about-text-component>
+            <!--From your profile-->
+            <div class="controls-group">
+                <from-your-profile></from-your-profile>
+            </div>
+            <!--Your Preferences-->
+            <school-preferences></school-preferences>
+        </div>
+    </div>
+    <!-- Filter End -->
+    <div class="col-md-9 results">
+        <!-- Search Results -->
+        <div class="match-options">
+            <!--comment for guest users-->
+            <div class="alert alert-success fade in alert-dismissable" role="alert" id="schoolFinder-wrap" *ngIf="SFNotificationText">
+                <button type="button" class="close" data-target="#schoolFinder-wrap" data-dismiss="alert"> <span aria-hidden="true">x</span></button>
+                <p>{{SFNotificationText}}</p>
+            </div>
+            <!-- Jump to School -->
+            <jump-to-school></jump-to-school>
+            <view-saved></view-saved>
+        </div>
+        <!-- jump to school end -->
+        <school-finder-match-rate [configKey]="configKey"></school-finder-match-rate>
+    </div>
+</div>

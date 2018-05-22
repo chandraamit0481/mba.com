@@ -1,0 +1,63 @@
+﻿<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<div *ngFor="let item of relatedContent">
+    <div class="relArticle clearfix" *ngIf="item.fields.contentTypeName?.value=='Assessment'">
+        <h6 class="topic">{{item.fields?.contentTypeName?.value}}</h6>
+        <a href="{{item.fields?.itemUrl?.value}}" class="linkarticle">
+            <img *ngIf="item.fields?.thumbnailImageUrl?.value" src="{{item.fields?.thumbnailImageUrl?.value}}" alt="{{item.fields?.thumbnailImage?.value}}" />
+            <h1 class="headline">{{item.fields?.title?.value}} </h1>
+        </a>
+        <div><a href="{{item.fields?.registerUrl?.value}}" class="link-register">Register now</a></div>
+    </div>
+    <div class="relArticle clearfix" *ngIf="item.fields.contentTypeName?.value=='Article'">
+        <div class="topic">{{item.fields?.contentTypeName?.value}}</div>
+        <a href="{{item.fields?.itemUrl?.value}}" class="linkarticle">
+            <img *ngIf="item.fields?.thumbnailImageUrl?.value" src="{{item.fields?.thumbnailImageUrl?.value}}" alt="{{item.fields?.thumbnailImage?.value}}" />
+            <h1 class="headline">{{item.fields?.title?.value}}</h1>
+        </a>
+
+        <div class="byline">
+            <time>{{item.fields?.publishDate?.value|dateFormat}}</time>
+        </div>
+    </div>
+    <div class="relArticle clearfix" *ngIf="item.fields.contentTypeName?.value=='Program'">
+        <div class="topic">{{item.fields?.contentTypeName?.value}}</div>
+        <a href="{{item.fields?.itemUrl?.value}}" class="linkarticle">
+            <img *ngIf="item.fields?.programLogo?.value" src="{{item.fields?.programLogo?.value}}" alt="{{item.fields?.programDisplayName?.value}}" />
+            <h1 class="headline">{{item.fields?.programDisplayName?.value}}</h1>
+            <small>{{item.fields?.programLength?.value}}</small>
+        </a>
+        <div class="schoolname">
+            <div class="sch">{{item.fields?.school[0]?.schoolName?.value}}</div>
+        </div>
+    </div>
+    <div class="relArticle clearfix" *ngIf="item.fields.contentTypeName?.value=='School'">
+        <div class="topic">{{item.fields?.contentTypeName?.value}}</div>
+        <a href="{{item.fields?.itemUrl?.value}}" class="linkarticle">
+            <img *ngIf="item.fields?.schoolLogo?.value" src="{{item.fields?.schoolLogo?.value}}" alt="{{item.fields?.schoolDisplayName?.value}}" />
+        </a>
+        <div class="schoolname">
+            <div class="sch">{{item.fields?.school[0]?.schoolName?.value}}</div>
+        </div>
+    </div>
+    <div class="relArticle clearfix" *ngIf="item.fields.contentTypeName?.value=='Event'">
+        <div class="topic">{{item.fields?.contentTypeName?.value}}</div>
+        <a href="{{item.fields?.itemUrl?.value}}" class="linkarticle">
+            <h1 class="headline">{{item.fields?.eventName?.value}}</h1>
+            <time>{{item.fields?.eventStartDate?.value| dateFormat}}</time>
+        </a>
+        <div class="schoolname">
+            <div class="sch">{{item.fields?.eventHostName?.value}}</div>
+            <div class="location">{{getLocation(item.fields,item.fields.contentTypeName?.value)}} </div>
+        </div>
+    </div>
+
+    <div class="relArticle clearfix" *ngIf="item.fields.contentTypeName?.value =='Product'">
+        <h6 class="product topic">{{item.fields?.contentTypeName?.value}}</h6>
+        <a href="{{item.fields?.itemUrl?.value}}" class="linkarticle" role="link" title="">
+            <img src="{{item.fields?.thumbnailImageUrl?.value}}" alt="{{item.fields?.thumbnailImage?.value}}" />
+            <h1 class="headline" *ngIf="item.fields?.title?.value">{{item.fields?.title?.value}}</h1>
+        </a>
+        <div class="price" *ngIf="item.fields?.price?.value!=null">{{item.fields?.price?.value | currencyFormat}}</div>
+        <no-product-available *ngIf="item.fields?.price?.value==null"></no-product-available>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+﻿<div class="eventDetailData" *ngIf="eventDetail">
+
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <event-header-component [eventHeader]="eventDetail?.eventHeaderData"></event-header-component>
+    <event-content-component [eventContent]="eventDetail?.eventContentData"></event-content-component>
+</div>

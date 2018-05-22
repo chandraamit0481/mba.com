@@ -1,0 +1,24 @@
+﻿<div class="col-md-2" *ngIf="secondaryProductList">
+    <div class="secondary-featured-items">
+        <h2>Featured</h2>
+        <ol>
+            <li class="items1" *ngFor="let item of secondaryProductList">
+                <article>
+                    <div class="content-container">
+                        <header>
+                            <img *ngIf="item?.productImageURL" src="{{item?.productImageURL}}" alt="{{item?.productThumbImageAltText}}">
+                            <h1 class="headline"><a id="productTitle" href="{{item?.productItemUrl}}">{{item?.productTitle}}</a></h1>
+                            <div class="priceThrough" *ngIf="item?.productOnSale">{{item?.productDiscountedPrice | currencyFormat}}</div>
+                            <no-product-available *ngIf="item?.productPrice==null else productAvailable"></no-product-available>
+                            <ng-template #productAvailable>
+                                <div class="price">{{item?.productPrice | currencyFormat}}</div>
+                                <product-select-button [product]="item"></product-select-button>
+                            </ng-template>
+
+                        </header>
+                    </div>
+                </article>
+            </li>
+        </ol>
+    </div>
+</div>

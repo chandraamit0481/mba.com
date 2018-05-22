@@ -1,0 +1,29 @@
+﻿<div>
+    <div class="shippingCheckout">
+        <div class="priceThrough" *ngIf="productContent.productOnsale  && productContent?.productDiscountedPrice">{{productContent?.productDiscountedPrice | currencyFormat}}</div>
+        <div class="price" *ngIf="productContent?.productPrice!=null else notAvailable">{{productContent?.productPrice | currencyFormat}}</div>
+        <ng-template #notAvailable>
+            <no-product-available></no-product-available>
+        </ng-template>
+        <div class="byline">{{productContent?.productMessageBelowPrice}}</div>
+        <div class="wrap">
+            <div class="form-group">
+                <label>Format</label>
+                <div class="formats" *ngIf="productContent.productFormat">
+                    <p>{{productContent.productFormat}}</p>
+                </div>
+            </div>
+            <div *ngIf="productContent?.productPrice">
+                <div class="form-group">
+                    <label for="qty">Quantity</label>
+                    <select class="form-control" id="qty" [(ngModel)]="voucher">
+                        <option value="{{value}}" *ngFor="let value of (minLimit | range : productContent.productQuantityMaxAllowedInCart)">{{value}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="addToCart" *ngIf="productContent?.productShowAddToCart==true">
+                <product-select-button [product]="productContent" [qty]="voucher"></product-select-button>
+            </div>
+        </div>
+    </div>
+</div>

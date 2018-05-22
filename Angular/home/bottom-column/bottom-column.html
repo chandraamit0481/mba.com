@@ -1,0 +1,51 @@
+﻿<ol class="items" *ngIf="item.displayType!=='Events'">
+    <li *ngFor="let article of itemList">
+        <article>
+            <div class="content-container">
+                <h6 class="topic">{{item.displayType}}</h6>
+                <h1 role="heading" class="headline" *ngIf="article.fields?.title?.value">
+                    <a [href]="article.fields?.itemUrl?.value" class="topic-view" role="link">
+                        {{article.fields?.title?.value}}
+                    </a>
+                </h1>
+                <div class="byline">
+                    <time>
+                        {{article.fields?.publishDate?.value | dateFormat}}
+                    </time>
+                    <br>
+                    {{article.fields?.authorName?.value}}
+                </div>
+            </div>
+        </article>
+    </li>
+</ol>
+
+<ol class="items" *ngIf="item.displayType==='Events'">
+    <li *ngFor="let event of itemList">
+        <article>
+            <div class="content-container">
+                <h6 class="topic">{{item.displayType}}</h6>
+                <h1 role="heading" class="headline" *ngIf="event.fields?.eventName?.value">
+                    <a [href]="event.fields?.itemUrl?.value" class="topic-view" role="link">
+                        {{event.fields?.eventName?.value}}
+                    </a>
+                </h1>
+
+                <div class="mobile-view">
+                   
+                    <div class="schoolname">
+                        <div class="sch">{{event.fields?.eventHostName?.value}}</div>
+                    </div>
+                    <div class="location" address [item]="event.fields"> </div>
+                </div>
+
+                <div class="byline">
+                    <time>
+                        {{event.fields?.eventStartDate?.value | dateFormat}}
+                    </time>
+                </div>
+            </div>
+        </article>
+    </li>
+
+</ol>

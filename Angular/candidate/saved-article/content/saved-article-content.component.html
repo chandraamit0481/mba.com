@@ -1,0 +1,33 @@
+﻿<div class="articles-wrap item-container col-md-12">
+    <ol class="items">
+        <li *ngFor="let item of model" [class]="[isProfile==true ? 'cp-dash-event':'']">
+            <article>
+                <div>
+                    <div>
+                        <figure>
+                            <img src="{{item.thumbnailImageUrl}}" alt="{{item.thumbnailImage}}">
+                        </figure>
+                        <div class="content-container">
+                            <h4>Article</h4>
+                            <h1 class="headline">
+                                <a href="{{item.itemUrl}}" class="topic-view">{{item.title}}</a>
+                            </h1>
+
+                            <div class="byline">
+                                {{item.publishDate | dateFormat}}
+                                <br>
+                                {{item.authorName}}
+
+                            </div>
+                            <div class="grid-button-row">
+                                <a href="{{item.itemUrl}}" class="button-primary pull-left">{{profileLabels?.readButtonText}}</a>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </article>
+        </li>
+    </ol>
+    </div>

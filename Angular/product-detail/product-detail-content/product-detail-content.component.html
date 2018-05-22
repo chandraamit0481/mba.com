@@ -1,0 +1,43 @@
+<div *ngIf="productContent">
+    <div class="col-lg-12">
+        <h6 class="subheading">Preparation</h6>
+        <h1 class="articleheading" role="heading">{{productContent.productTitle}}</h1>
+    </div>
+    <div class="alert alert-success fade in alert-dismissable" *ngIf="productContent.productAlertMessage">
+        <button type="button" class="close" data-target="#aboutschool-wrap" data-dismiss="alert" (click)="saveInCookie()"> <span aria-hidden="true">×</span></button>
+
+        <h1 class="headline">{{productContent.productAlertMessage}}</h1>
+
+    </div>
+    <div class="col-md-8">
+        <div class="articleIMG"><img *ngIf="productContent.productImageUrl" src="{{productContent.productImageUrl}}" alt="{{productContent.productImage}}" /></div>
+        <div class="col-md-1 social-icon-vertical">
+            <div id="sidebar" class="social-icon-vert" data-animation="animated bounceInDown">
+                <!-- Icon for share -->
+                <div>
+                    <h4>Share</h4>
+                    <social-media-icon></social-media-icon>
+                </div>
+                
+            </div>
+        </div>
+        <!-- Article Content starts -->
+        <div class="productContent col-md-10">
+
+            <div class="productContent"><p [innerHtml]="productContent.productCaption | safeHtml"></p></div>
+
+            <div *ngIf="productContent.productDescriptionName !== '' && productContent.productDetailDescription !== '' ">
+                <h4>{{productContent.productDescriptionName}}</h4>
+                <p class="body" [innerHtml]="productContent.productDetailDescription | safeHtml"></p>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-3 pull-right-relArticle">
+        <product-right-section [productContent]="productContent"></product-right-section>
+        <div class="relatedSection">
+            <h6 class="side-header">related</h6>            
+                <related-content [configKey]="configKey" [relatedItemIds]="relatedProductItemIds"></related-content>           
+        </div>
+    </div>
+</div>

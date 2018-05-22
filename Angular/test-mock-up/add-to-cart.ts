@@ -1,0 +1,1 @@
+﻿export const addToCartData: string = `{"envelope":null,"data":null,"httpStatusCode":201,"isSuccessStatusCode":true,"content":null,"headers":{"Date":["Wed, 29 Nov 2017 09:08:53 GMT"],"Location":["https://business.shoppingcart.service:2022/api/shopping-cart/796055"],"Server":["Kestrel"]}}`;

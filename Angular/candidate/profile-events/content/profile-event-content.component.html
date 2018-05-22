@@ -1,0 +1,25 @@
+﻿<ol class="items">
+    <li *ngFor="let item of model" [class]="[isProfile==true ? 'cp-dash-event':'']">
+        <article>
+            <div [class]="[item?.isExpired? 'content-container cp-event-disable':'content-container']">
+                <h4 *ngIf="isRecentEvent">Next Event</h4>
+                <h1 class="headline"> {{item?.startDate| dateFormat}} </h1>
+                <div class="description">
+                    <div class="event-title s-program">
+                        <h1 class="headline" id="eventname"> {{item?.eventName}} </h1>
+                    </div>
+                    <div class="event-details">
+                        <div class="collage-type s-loc">
+                            <div class="location"> {{item?.eventLocation?.getAddress()}} </div>
+                        </div>
+                    </div>
+                    <div id="time"> {{item?.eventStartHour}} </div>
+                </div>
+                <div class="grid-button-row">
+                    <button class="button-primary pull-left" role="button" (click)="openNewWindow(item?.hostUrl)" *ngIf="item?.registrationRequired && item?.hostUrl ">{{profileLabels?.noAssessmentsButtonText}}</button>
+                    <a (click)="redirectPage(item?.eventUrl)" href="javascript:void(0);" class="viewsaved" role="link">View Details</a>
+                </div>
+            </div>
+        </article>
+    </li>
+</ol>

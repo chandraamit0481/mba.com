@@ -1,0 +1,53 @@
+﻿<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<div class="programData" *ngIf="programProfile">
+    <header-component [programHeader]="programProfile.programheaderData"></header-component>
+
+    <div class="container">
+        <div class="articles program-profile clearfix col-md-12">
+            <div class="item-container">
+                <div class="item-content-container col-md-9">
+                    <!--PROGRAM DESCRIPTION-->
+                    <program-description [programDescription]="programProfile.programDescriptioData" [programDetail]="programProfile.programDetailData"></program-description>
+                    <!--PROGRAM DESCRIPTION OVER-->
+                    <important-dates [programImportantDates]="programProfile?.programImportantDatesData" [programRollingAdmissions]="programProfile?.programOverviewData?.programRollingAdmissions"></important-dates>
+                    <!--Event-->
+                    <div class="event-wrap col-md-12">
+                        <h2> Events</h2>
+                        <div class="col-md-12" *ngIf="!noEvent;else message">
+                            <event-list [eventResult]="eventDetails"></event-list>
+                        </div>
+                        <ng-template #message>There are no events scheduled at this time</ng-template>
+                    </div>
+                    <!--Event Over-->
+                    <!--video-->
+                    <video-list [links]="programProfile.programLinkData"></video-list>
+                    <!--video over-->
+                    <!--Articles-->
+                    <div class="articles-wrap col-md-12" *ngIf="schoolItemId">
+                        <h2> Articles</h2>
+                        <article-items selectedTopic="" [schoolItemId]="schoolItemId" (loaderDisabled)="disableLoader($event)" [configKey]="configKey" [headerTitle]="programProfile?.programheaderData?.programDisplayName"></article-items>
+                    </div>
+                </div>
+                <!--Articles Over-->
+                <!--Overview-->
+                <program-overview [programOverview]="programProfile.programOverviewData"></program-overview>
+                <div class="col-md-3 side-bar" *ngIf="programProfile.programLinkData?.length>0">
+                    <div class="col-md-12 side-bar-wrap">
+                        <h2 class="margin-top">{{programHeaderText}}</h2>
+                        <social-media-icon [socialLinks]="programProfile.programLinkData"></social-media-icon>
+                    </div>
+                </div>
+                <div class="col-md-3 side-bar">
+                    <div class="col-md-12 side-bar-wrap">
+                        <map-comp [map-address]="mapAddress"></map-comp>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 clearfix">
+            <div class="alert-p alert-p-info fade in">
+                <p> The information on this page has been provided to us, by the university, school, or program. For the latest updated information, please visit the school or program site directly. </p>
+            </div>
+        </div>
+    </div>
+</div>

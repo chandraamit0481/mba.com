@@ -1,0 +1,7 @@
+﻿<div class="alert alert-success fade in alert-dismissable" *ngIf="showNotification">
+    <button type="button" class="close" data-target="#aboutschool-wrap" data-dismiss="alert" (click)="saveInCookie()"> <span aria-hidden="true">×</span></button>
+
+    <h1 class="headline">{{message}}</h1>
+
+    <button class="button-primary top25" (click)="registerNow()"> Create a profile </button>
+</div>

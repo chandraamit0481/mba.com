@@ -1,0 +1,22 @@
+﻿
+<div class="save-program">
+    <save [id]="programOrgID" [configKey]="configKey" [isDetail]="isDetail"></save>
+</div>
+<div class="prog">
+    <div class="program-wrap col-md-12">
+
+        <div class="col-md-8 col-xs-12 program-description">
+            <h3>Program Description </h3>
+            <p [innerText]="programDescriptionData?.programOverview"></p>
+        </div>
+
+        <div class="col-md-4 col-xs-12 program-detail">
+            <h3>Program Details </h3>
+            <ul class="pro-detail-list" role="navigation">
+                <li class="details" *ngFor="let programDetailData of programDetailData">{{programDetailData}}</li>
+                <ng-container *ngIf="areaOfStudy"><li *ngFor="let programDetailData of areaOfStudy">{{programDetailData.programAreaOfStudyIdLookupName?.value}}</li></ng-container>
+                <li *ngIf="programMilitaryFriendlyUrl"><a href="{{programMilitaryFriendlyUrl}}">{{programMilitaryFriendlyUrl}}</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

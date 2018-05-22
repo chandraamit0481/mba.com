@@ -1,0 +1,61 @@
+﻿<div class="col-md-12 important-dates-content">
+
+    <div class="row program-grid-heading">
+        <div class="col-md-3 col-xs-3">Location</div>
+        <div class="col-md-4 col-xs-2">Date</div>
+        <div class="col-md-3 col-xs-3">Appointment Number </div>
+        <div class="col-md-2 col-xs-2">Status</div>
+    </div>
+
+    <div class="row grid-content" *ngFor="let item of model;let indx = index ">
+        <div class="col-md-3 col-sm-4 col-xs-8">
+            <a class="btn btn-link scoreicon" *ngIf="isPast && (item?.fields?.status?.value != '' && item?.fields?.status?.value?.toUpperCase() !==assessmentStatus.ScoreCancelled && item?.fields?.status?.value?.toUpperCase() !==assessmentStatus.Cancelled)">
+                <span class="glyphicon" [ngClass]="toggle[indx] ? 'glyphicon-minus': 'glyphicon-plus'" (click)="toggle[indx] = !toggle[indx]"></span>
+            </a>
+            <span id="centername">{{item?.fields?.testCenterName?.value}}</span>
+            <div class="location">{{location(item?.fields)}}</div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-4" id="date">{{item?.fields?.scheduledApptDateTime?.value | dateFormat:'MMMM d, y HH:mm' }}</div>
+
+        <div class="col-md-3 col-sm-2 col-xs-4" id="appointmentid">{{item?.fields?.appointmentID?.value}} </div>
+
+        <div class="col-md-2 col-sm-10 col-xs-12 status-wrap">
+            <div class="col-md-12 col-xs-4" id="status" *ngIf="item?.fields?.status?.value!=='NA'">{{item?.fields?.status?.value}}</div>
+            <div class="col-md-12 col-xs-4" *ngFor="let action of item.fields?.actions">
+                <a *ngIf="action.text==assessmentAction.EnterESRCode;else elseAction" (click)="getESRCode(item?.fields?.appointmentID?.value)" class="viewsaved" role="link" data-toggle="modal" href="#ESRPop">{{action.text}}</a>
+                <ng-template #elseAction>
+                    <a (click)="navigateReportUrl(item.fields?.appointmentID?.value,action.text)" class="viewsaved" role="link">{{action.text}}</a>
+                </ng-template>
+            </div>
+        </div>
+        <!-- score Report -->
+        <score-report *ngIf="toggle[indx]" [appointmentId]="item?.fields?.appointmentID?.value"></score-report>
+    </div>
+    <apply-esr [appointmentId]="currentAppointmentId"></apply-esr>
+    <a href="javascript:void(0);" #viewESRModel class="hidden" role="link" data-toggle="modal" data-target="#viewESRModel" *ngIf="isPast"></a>
+</div>
+
+<div class="modal fade" id="viewESRModel" role="dialog" *ngIf="isPast">
+    <div class="modal-dialog login-container">
+        <!-- Modal content-->
+        <div class="modal-content login-screen signUp">
+            <a class="boxclose" id="boxclose" data-dismiss="modal">&times;</a>
+            <div class="modal-body content">
+                <div class="row" *ngIf="isLoading;else loaded">
+                    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+                </div>
+                <ng-template #loaded>
+                    <div class="row">
+                        <div class="col-md-1 col-xs-2">
+                            <img src="/mbaweb/assets/img/checkbox-on.png" />
+                        </div>
+                        <div class="col-md-11 col-xs-10"><div>{{viewESRMessage}}</div> <button class="button-primary pull-right" data-dismiss="modal">ok</button></div>
+
+                    </div>
+                </ng-template>
+
+            </div>
+        </div>
+    </div>
+</div>
+

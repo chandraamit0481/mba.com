@@ -1,0 +1,47 @@
+﻿<div class="event-wrap col-md-12">
+
+    <div class="col-md-12">
+        <div class="row event-title-wrap">
+            <div class="col-md-4 col-xs-12">Event</div>
+            <div class="col-md-4 col-xs-12">Host and Location</div>
+            <div class="col-md-4 col-xs-12">About</div>
+
+        </div>
+        <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+
+        <div class="alert alert-success fade in alert-dismissable" *ngIf="notificationMessage && !isLoading">
+            <h1 class="headline">{{notificationMessage}}</h1>
+        </div>
+        <div class="row event-content-wrap" *ngFor="let item of eventResult;let last = last">
+            <div class="col-md-4 col-xs-12 event-title">
+                <div class="content-container">
+                    <h1 class="headline"><a href="{{item?.fields?.itemUrl?.value}}">{{item?.fields?.eventName?.value}}</a></h1>
+                    <div class="byline">
+                        <div class="time">
+                            <p> {{item?.fields?.eventStartDate?.value | dateFormat}}</p>
+
+                        </div>
+                        <div class="reg-req" *ngIf="item?.fields?.eventRegistrationRequired?.value && item?.fields?.eventWebsiteAddress?.value">Registration Required</div>
+                    </div>
+                    <div class="icons">
+                        <save [id]="item?.fields?.eventId?.value" [list]="savedEventList" [configKey]="saveKey" [isLast]="last"></save>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-12 event-details">
+                <div class="collage-type">
+                    <p class="font-bold" *ngIf="item?.fields?.eventHostName?.value"><a href="{{item?.fields?.itemUrl?.value}}">{{item?.fields?.eventHostName?.value}}</a></p>
+                    <div class="location" address [item]="item?.fields"></div>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-xs-12 event-description">
+                <p class="desc" [innerHtml]="item?.fields?.description?.value | truncate : 250 : 'more' : item?.fields?.itemUrl?.value"><br></p>
+            </div>
+        </div>
+
+    </div>
+    <!-- Use below html for pagination -->
+    <pager (emitMethod)="refreshPaging($event)" [totalItems]="totalItems" [rows]="rows" [currentPage]="pageNumber"></pager>
+</div>

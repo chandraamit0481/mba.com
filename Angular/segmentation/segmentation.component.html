@@ -1,0 +1,90 @@
+﻿<div id="typingToolPopup">
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div id="typingToolPopup-Form" *ngIf="!isLoading">
+        <div class="modal-background active" [ngSwitch]="segmentType">
+
+            <div class="survey-group" *ngSwitchCase="segmentationEnum.Defined">
+                <div class="Q">
+                    <div class="context">
+                        <h6>{{completedMessage}}</h6>
+                    </div>
+                </div>
+            </div>
+
+            <div class="two-col" *ngSwitchCase="segmentationEnum.Home">
+                <div class="first-col">
+                    <div class="first-col-img-container">
+                        <img [src]="homeModel?.welcomeImageUrl" alt="welcome">
+                        <div id="logo" *ngIf="homeModel?.logoImage">
+                               <img [src]="homeModel?.logoImage" alt="logo"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="second-col">
+                    <div class="Q">
+                        <div class="context">
+                            <h1><span [innerHTML]="homeModel?.welcomeTitle | safeHtml"></span></h1>
+                            <h6 [innerHtml]="homeModel?.welcomeMessage"></h6>
+                        </div>
+                        <div class="button-container welcome">
+                            <button type="button" class="btn btn-success btn-sm" (click)="homeNextClick()">{{homeModel?.btnNextText}}</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <segmentation-question [model]="questionModel" (nextQuestion)="nextQuestion($event)" [pageText]="questionPageText" *ngSwitchCase="segmentationEnum.Questions">
+                <h1 header><span [innerHTML]="homeModel?.welcomeTitle | safeHtml"></span></h1>
+                <div class="pagination" footer>{{currentQuestionNumber}} of {{maxQuestionNumber}}</div>
+            </segmentation-question>
+
+            <div class="survey-group" *ngSwitchCase="segmentationEnum.Email">
+                <form novalidate (ngSubmit)="save()" [formGroup]="segmentForm">
+                    <div class="Q tt-email-container">
+                        <div class="context">
+                            <h1><span [innerHTML]="homeModel?.welcomeTitle | safeHtml"></span></h1>
+                            {{homeModel?.emailCollectionMessage}}
+                        </div>
+                        <div class="tt-email-ph">
+                            <label for="ttEmail">Email:</label>
+                            <input type="email" id="ttEmail" name="email" formControlName="email">
+                        </div>
+                        <div class="context">
+                            <div class="consent-check-container">
+                                <input type="checkbox" id="ttConsent" name="consent" formControlName="consent" style="float: left">
+                            </div>
+                            <div class="consent-text-container">
+                                <h6 [innerHTML]="homeModel?.emailConsentText"></h6>
+                            </div>
+                        </div>
+                        <div class="motivation tt-error">
+                            {{errorMessage}}
+                        </div>
+                        <div class="button-container">
+                            <button type="submit" class="btn btn-success btn-sm">{{homeModel?.btnSubmitText}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="two-col" *ngSwitchCase="segmentationEnum.Results">
+                <div class="first-col">
+                    <div class="first-col-img-container">
+                        <img alt="{{segmentationResult?.resultImageAltText}}" src="{{segmentationResult?.resultImageUrl}}">
+                    </div>
+                </div>
+                <div class="second-col">
+                    <div class="Q">
+                        <div class="context">
+                            <h1><span [innerHTML]="homeModel?.welcomeTitle | safeHtml"></span></h1>
+                            <h4 id="stat"></h4>
+                            <p class="payoff">{{segmentationResult?.resultText}}</p>
+                            <h6 class="final-msg" [innerHTML]="homeModel?.finalMessage | safeHtml"></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

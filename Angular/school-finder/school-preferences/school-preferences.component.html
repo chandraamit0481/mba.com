@@ -1,0 +1,62 @@
+﻿
+<div class="controls-group">
+    <h6>Your Preferences</h6>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div *ngIf="!isLoading">
+        <div class="control">
+            <div class="control-name">Where You Want to Go</div>
+            <multiselect-dropdown [placeholder]="'Location'" configKey="countries" [selectedItems]="preferences?.desiredLocation?preferences.desiredLocation:''"
+                                  (emitMethod)="refreshMultiSelectList($event,'desiredLocation')"></multiselect-dropdown>
+
+        </div>
+        <div class="control">
+            <div class="control-name">Focus</div>
+            <multiselect-dropdown [placeholder]="'Area of Study'" configKey="areaOfStudy" [selectedItems]="preferences?.programAreaOfStudy?preferences.programAreaOfStudy:''"
+                                  (emitMethod)="refreshMultiSelectList($event,'programAreaOfStudy')"></multiselect-dropdown>
+        </div>
+        <div class="control">
+            <div class="control-name">Preferred Class Style</div>
+            <span *ngFor="let item of classStyleList;let classIndex = index;">
+                <input id="class-style-online-{{classIndex}}" type="checkbox" (change)="refreshData()"
+                       [(ngModel)]="classStyleList[classIndex].checked" />
+                <label for="class-style-online-{{classIndex}}">{{item.value}}</label>
+            </span>
+            <div class="control-clear" *ngIf="selectedClassStyleList && selectedClassStyleList.length>0" (click)="clearPreferences(classStyleList)">Clear</div>
+        </div>
+        <div class="control">
+            <div class="control-name">Desired Program Type</div>
+            <span *ngFor="let item of programTypeList;let progTypeIndex = index;">
+                <input id="program-format-online-{{progTypeIndex}}" type="checkbox" (change)="refreshData()"
+                       [(ngModel)]="programTypeList[progTypeIndex].checked">
+                <label for="program-format-online-{{progTypeIndex}}">{{item.value}}</label>
+            </span>
+            <div class="control-clear" *ngIf="selectedProgramType && selectedProgramType.length>0" (click)="clearPreferences(programTypeList)">Clear</div>
+        </div>
+        <div class="control">
+            <div class="control-name">Years available to complete degree</div>
+            <span *ngFor="let item of yearsAvailableList;let yearsIndex = index;">
+                <input id="years-online-{{yearsIndex}}" type="checkbox" (change)="refreshData()"
+                       [(ngModel)]="yearsAvailableList[yearsIndex].checked">
+                <label for="years-online-{{yearsIndex}}">{{item.value}}</label>
+            </span>
+            <div class="control-clear" *ngIf="selectedYearsAvailable && selectedYearsAvailable.length>0" (click)="clearPreferences(yearsAvailableList)">Clear</div>
+            <!---->
+        </div>
+        <div class="control">
+            <div class="control-name">Desired Degree</div>
+            <span *ngFor="let item of desiredDegreesList;let degreeIndex = index;">
+                <input id="degree-online-{{degreeIndex}}" type="checkbox" (change)="refreshData()"
+                       [(ngModel)]="desiredDegreesList[degreeIndex].checked">
+                <label for="degree-online-{{degreeIndex}}">{{item.value}}</label>
+            </span>
+            <div class="control-clear" *ngIf="selectedDesiredDegree && selectedDesiredDegree.length>0" (click)="clearPreferences(desiredDegreesList)">Clear</div>
+            <!---->
+        </div>
+        <br />
+        <div class="control">
+            <input id="military-friendly" type="checkbox" [(ngModel)]="militaryFriendlySelected" (change)="refreshData()">
+            <label for="military-friendly" class="control-name">Military Friendly</label>
+            <!---->
+        </div>
+    </div>
+</div>

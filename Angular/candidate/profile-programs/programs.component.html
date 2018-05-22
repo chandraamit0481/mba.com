@@ -1,0 +1,56 @@
+﻿<div class="saved-program-wrap col-md-12">
+    <h2> Saved Programs</h2>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <!--<h5>Your Saved Programs</h5>-->
+    <div class="col-md-12">
+        <div *ngIf="model?.length>0;else noProgram">
+            <div class="row program-grid-heading">
+                <div class="col-md-6 col-xs-3">Program</div>
+                <div class="col-md-6 col-xs-5">School</div>
+            </div>
+
+            <div class="row content-wrap" *ngFor="let item of model">
+                <div class="col-md-6 col-xs-8 event-title">
+
+                    <h1 role="heading" class="headline" id="programname" *ngIf="item.programName && item.programUrl; else programNameWithoutUrlBlock"><a (click)="redirectPage(item.programUrl)" href="javascript:void(0);"> {{item.programName}} </a></h1>
+                    <ng-template #programNameWithoutUrlBlock>
+                        <h1 role="heading" class="headline" id="programname">{{item.programName}}</h1>
+                    </ng-template>
+                    <div class="byline">
+                        <time>
+                            {{item.programDuration}}
+                        </time>
+
+                    </div>
+                    <div class="icons">
+                        <a (click)="removeProgram(item.savedProgramID)" class="saveicon" href="javascript:void(0);"></a>
+                        <span  class="savetext">Saved</span>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xs-8 event-details">
+                    <div class="collage-type">
+                        <h1 role="heading" class="headline" id="schoolname" *ngIf="item.schoolName && item.schoolUrl; else schoolNameWithoutUrlBlock"><a (click)="redirectPage(item.schoolUrl)" href="javascript:void(0);">{{item.schoolName}}</a> </h1>
+                        <ng-template #schoolNameWithoutUrlBlock>
+                            <h1 role="heading" class="headline" id="schoolname">{{item.schoolName}}</h1>
+                        </ng-template>
+                            <p>{{item.schoolUniversity}} </p>
+                            <div class="location" *ngIf="item.schoolLocation?.getAddress()">{{item.schoolLocation?.getAddress()}} </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ng-template #noProgram>
+            <div>{{noProgramFound}}</div>
+        </ng-template>
+        <div class="row grid-button-row">
+            <button class="button-primary pull-left" role="button" (click)="redirectPage(profileLabels.schoolFinderUrl)"> {{profileLabels?.findMoreProgramsButtonText}} </button>
+            <button class="button-link pull-right" role="link" [routerLink]="['/candidate-profile']" *ngIf="!isProfile;else profile">&lt; {{profileLabels?.backButtonText}}</button>
+            <ng-template #profile>
+                <button class="button-link pull-right linkall" [routerLink]="['/candidate-profile/programs']" *ngIf="model?.length>0"> {{profileLabels?.seeAllProgramsLinkText}}> </button>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<!--Saved Programs Over-->

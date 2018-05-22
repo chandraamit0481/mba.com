@@ -1,0 +1,32 @@
+﻿<div class="col-lg-12" *ngIf="products">
+    <h6 class="subheading">{{title}}</h6>
+    <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+    <div class="articles col-md-10">
+        <div class="primary-featured-items">
+            <article class="featured-item">
+
+                <img *ngIf="products.primaryProductOne?.productBannerImageUrl" alt="{{pageConstants.AltImgText}}" class="art-image" src="{{products.primaryProductOne?.productBannerImageUrl}}">
+                <div class="content-container">
+                    <header>
+                        <h1> <a href="{{products.primaryProductOne?.productItemUrl}}">{{products.primaryProductOne?.productTitle}}</a></h1>
+                        <div class="byline" *ngIf="products.primaryProductOne?.productFormat">
+                            Format: {{products.primaryProductOne?.productFormat}}
+                        </div>
+                    </header>
+                    <section>
+                        <p [innerHtml]="products.primaryProductOne?.productCaption | safeHtml"></p>
+                    </section>
+                    <div class="priceThrough" *ngIf="products.primaryProductOne?.productOnSale">{{products.primaryProductOne?.productDiscountedPrice | currencyFormat}}</div>
+
+                    <no-product-available *ngIf="products.primaryProductOne?.productPrice==null  else productAvailable"></no-product-available>
+                    <ng-template #productAvailable>
+                        <span class="price"><h1>{{(products.primaryProductOne?.productPrice) | currencyFormat }}</h1></span>
+                        <product-select-button [product]="products?.primaryProductOne"></product-select-button>                       
+                    </ng-template>
+                </div>
+            </article>
+
+        </div>
+    </div>
+    <secondary-featured-products [secondaryProduct]="products.secondaryProduct"></secondary-featured-products>
+</div>

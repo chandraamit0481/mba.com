@@ -1,0 +1,103 @@
+﻿<div class="container">
+    <div class="col-md-8">
+        <div class="col-md-1 social-icon-vertical">
+            <div id="sidebar" class="social-icon-vert" data-animation="animated bounceInDown">
+                <!-- Icon for share -->
+                <div>
+                    <h4>Share</h4>
+                    <social-media-icon></social-media-icon>
+                </div>
+                <!-- Icon for Save -->
+                <save [id]="eventId" [configKey]="configKey" [isDetail]="isDetail" [isTopInfo]="true"></save>
+            </div>
+        </div>
+        <!-- Article Content starts -->
+        <div class="eventContent col-md-10">
+            <time>
+                <div *ngIf="(eventContent?.startDate ) == (eventContent?.endDate );else notEqualsEndDate"><strong>{{siteCoreConfig?.labels?.date}} </strong>{{eventContent?.startDate | dateFormat }}</div>
+                <ng-template #notEqualsEndDate><strong>{{siteCoreConfig?.labels?.date}}</strong> {{eventContent?.startDate | dateFormat }} to {{eventContent?.endDate | dateFormat }}</ng-template>
+                <div *ngIf="(eventContent?.codeIdStartHour ) && (eventContent?.codeIdEndHour )"><strong>{{siteCoreConfig?.labels?.time}}</strong> {{eventContent?.codeIdStartHour}} to {{eventContent?.codeIdEndHour }}</div>
+            </time>
+
+            <div class="contact-info">
+                <div class="row">
+                    <div class="col-md-4" *ngIf="!eventContent?.isOnLine"><strong>{{siteCoreConfig?.labels?.location}}</strong></div>
+                    <div class="col-md-8">
+                        <div class="address" *ngIf="mapAddress">
+                            <p *ngIf="eventContent?.address1">{{eventContent?.address1}}</p>
+                            <p *ngIf="eventContent?.address1">{{eventContent?.address2}}</p>
+                            <p *ngIf="eventContent?.address3">{{eventContent?.address3}}</p>
+                            <p *ngIf="eventContent?.eventCityName ||eventContent?.eventStateName ||eventContent?.eventCountryName ">{{eventContent?.eventCityName}} {{eventContent?.eventStateName}} {{eventContent?.eventPostalCode}}</p>
+                            <p *ngIf="eventContent?.eventCountryName">{{eventContent?.eventCountryName}}</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="eventContent?.phoneNumber">
+                    <div class="col-md-4"><strong>{{siteCoreConfig?.labels?.phone}}</strong></div>
+                    <div class="col-md-8">
+
+                        <div class="email"><span class="black-text">{{eventContent?.phoneNumber}}</span></div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="eventContent?.emailAddress">
+                    <div class="col-md-4"><div class="email"><strong>{{siteCoreConfig?.labels?.email}}</strong></div></div>
+                    <div class="col-md-8">
+
+                        <a href="mailto:{{eventContent?.emailAddress}}">{{eventContent?.emailAddress}}</a>
+                    </div>
+                </div>
+                <div class="row" *ngIf="eventContent?.websiteAddress">
+                    <div class="col-md-4"><strong>{{siteCoreConfig?.labels?.website}}</strong></div>
+                    <div class="col-md-8">
+
+                        <a href="{{eventContent?.websiteAddress}}">{{eventContent?.websiteAddress}}</a>
+                    </div>
+                </div>
+                <div class="row" *ngIf="eventContent?.registrationRequired">
+                    <div class="col-md-4"><strong>{{siteCoreConfig?.labels?.isRegistrationRequired}}</strong></div>
+                    <div class="col-md-8">
+
+                        <p> {{eventContent?.registrationRequired}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4"><strong>{{siteCoreConfig?.labels?.format}}</strong></div>
+                    <div class="col-md-8">
+                        {{eventContent?.isOnLine?"Online":"In Person"}}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4" *ngIf="eventContent?.description"><strong>{{siteCoreConfig?.labels?.moreInformation}} </strong></div>
+                    <div class="col-md-8">
+                        <p class="information" [innerHtml]="eventContent?.description | safeHtml"></p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4"><p *ngIf="eventContent?.hostNames?.length >0"><strong>{{siteCoreConfig?.labels?.programs}}</strong></p></div>
+                    <div class="col-md-8">
+                        <ul class="eventListing" *ngFor="let hosts of eventContent?.hostNames"><li>{{hosts}}</li></ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="grid-button-row" *ngIf="eventContent?.registrationRequired == 'Yes' && eventContent?.websiteAddress ">
+                        <button class="button-primary pull-left" type="button" (click)="registerNow()">Register Now</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-3 pull-right-relArticle">
+        <map-comp *ngIf="!eventContent?.isOnLine" [map-address]="mapAddress"></map-comp>
+        <div class="relatedSection">
+            <h6 class="side-header">related</h6>
+            <div>
+                <related-content></related-content>
+            </div>
+        </div>
+    </div>
+</div>

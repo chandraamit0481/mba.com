@@ -1,0 +1,91 @@
+﻿<div class="modal fade" id="shCart" role="dialog">
+
+    <div class="modal-dialog login-container">        
+        <!-- Modal content-->
+        <div class="modal-content login-screen signUp">
+            <a class="boxclose" id="boxclose" data-dismiss="modal">&times;</a>
+            <div class="modal-body content">
+                <loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+                <table id="cart" class="table table-hover table-condensed" *ngIf="shoppingCartDetails?.length;else nocart">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+
+                        </tr>
+                    </thead>
+                    <tbody class="shopping-cart-details">
+                        <tr *ngFor="let item of shoppingCartDetails">
+                            <td class="img">
+                                
+                                    <img src="{{item?.productImageURL}}" alt="{{item?.productImage}}" class="img-responsive" />
+                                   
+                                
+                            </td>
+                            <td data-th="Title">
+                                <strong>{{item?.productTitle}}</strong>
+                            </td>
+                            <td data-th="Price" class="price-value" id="tdPrice">{{item?.productPrice | currencyFormat }}</td>
+                            <td data-th="Quantity" class="quantity" id="tdQty">
+                                {{item?.productQuantity}}
+                            </td>
+
+                            <td class="actions bottomborder" data-th="">
+                                <a (click)="delete(item?.cartItemId,item?.productId)" class="button-link" href="javascript:void(0);"><i class="glyphicon glyphicon-remove"></i></a>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+
+                        <tr>
+                            <td colspan="4">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <h2>Total: {{shoppingCartDetails[shoppingCartDetails.length-1]?.itemTotal | currencyFormat }}</h2>
+                                        <small>
+                                            {{disclaimer}}
+                                        </small>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 form-group">
+                                        <div class="col-md-12 col-sm-12 col-xs-12"><a class="button-primary pull-right" (click)="checkout()">Checkout <i class="glyphicon glyphicon-chevron-right"></i></a></div>
+                                        <div class="col-md-12 col-sm-12 col-xs-12">
+                                            <a class="button-link pull-right" data-dismiss="modal" href="#"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</a>
+                                        </div>
+                                   </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <ng-template #nocart>
+                <div class="col-md-12" id="cart" *ngIf="!isLoading">
+                    <div class="row">
+                        <div class="col-md-12 shopping-cart-details clearfix">{{noData}}</div>
+                    </div>
+                    <hr />
+                    <div class="row ">
+                        <div class="col-lg-6 col-md-6">
+                            <h2>Total: $0.00</h2>
+                            <small>
+                               {{disclaimer}}
+                            </small>
+                        </div>
+                        <div class="col-lg-6 col-md-6 form-group">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <a class="button-link" data-dismiss="modal" href="#"><i class="glyphicon glyphicon-chevron-left"></i> Continue Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                </div>
+            </ng-template>
+         
+        </div>
+
+    </div>
+</div>

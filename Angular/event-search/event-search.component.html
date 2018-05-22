@@ -1,0 +1,33 @@
+﻿<div>
+    <div class="container">
+        <!-- Filter Column left -->
+        <div class="controls col-md-3">
+            <h5>{{title}}</h5>
+            <a href="javascript:void();" class="controls-trigger-show button-link" id="show">Show Controls</a>
+
+            <div class="controls-container hides">
+                <div class="trigger-container">
+                    <a href="javascript:void();" class="controls-trigger-hide button-link " id="hide">Hide Controls</a>
+                </div>
+                <about-text-component></about-text-component>
+
+                <event-search-left></event-search-left>
+
+            </div>
+        </div>
+
+        <!-- Filter End -->
+        <div class="col-md-9 results">
+            <!-- Search Results -->
+
+            <div class="match-options">
+                <view-saved cssName="viewsaved pull-left"></view-saved>
+                <hr>
+            </div>
+            <!-- jump to school end -->
+            <event-search-result></event-search-result>
+        </div>
+
+
+    </div>
+</div>

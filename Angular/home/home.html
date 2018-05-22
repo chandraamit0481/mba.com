@@ -1,0 +1,11 @@
+﻿<article-primary-featured-articles></article-primary-featured-articles>
+
+<div class="col-md-12 importantLinks" *ngIf="bottomColumns">
+    <div class="col-md-4" *ngFor="let item of bottomColumns">
+        <a [href]="item.headingUrl">
+            <h2> {{item.heading}}</h2>
+        </a>
+
+        <bottom-column [item]="item"></bottom-column>
+    </div>
+</div>

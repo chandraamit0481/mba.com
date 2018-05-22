@@ -1,0 +1,1 @@
+export const TestSectionName = ["All Test Sections", "Quantitative/Math", "Verbal/Words", "Integrated Reasoning / IR", "AWA / Writing"];

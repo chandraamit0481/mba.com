@@ -1,0 +1,30 @@
+﻿<div class="container">
+    <div class="articles clearfix col-md-12">
+        <div *ngIf="!isViewAll; else elseBlock  ">
+            <h2>Articles by Topic Area <view-saved></view-saved></h2>
+        </div>
+        <ng-template #elseBlock>
+            <div>
+                <h2>Articles and Announcements <view-saved></view-saved></h2>
+            </div>
+        </ng-template>
+        
+        <div class="item-container">
+            <div class="col-md-3">
+                <loader-component *ngIf="!topicItemList" [loading]="isLoading" [errored]="errored"></loader-component>
+                <ul class="topics" role="navigation">
+                    <li *ngFor="let topic of topicItemList">
+                        <a [ngClass]="topic.title==selectedTopic ? 'topic-view selected':'topic-view'" (click)="updateArticleList(topic)" href="javascript:void(0);">{{topic.title}}</a>
+                    </li>
+                </ul>
+            </div>
+            <article-items [selectedTopic]="selectedTopic" (loaderDisabled)="disableLoader($event)" [configKey]="configKey"></article-items>
+        </div>
+        <div class="button-rule" *ngIf="!isViewAll">
+            <button *ngIf="itemUrl else firstTopic" (click)="navigateTopicPage(itemUrl)">View All {{selectedTopic}}</button>
+            <ng-template #firstTopic>
+                <button (click)="navigateTopicPage(topicItemList[0]?.itemUrl)">View All {{selectedTopic}}</button>
+            </ng-template>
+        </div>
+    </div>
+</div>

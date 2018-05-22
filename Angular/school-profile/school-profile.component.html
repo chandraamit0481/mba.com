@@ -1,0 +1,58 @@
+﻿<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<div class="schoolData" *ngIf="schoolProfile">
+
+    <school-header-component [schoolHeader]="schoolProfile.schoolDetail"></school-header-component>
+
+    <div class="container">
+        <div class="articles school-profile clearfix col-md-12">
+            <div class="item-container">
+                <div class="item-content-container col-md-9">
+
+                    <!--Programs-->
+                    <div class="program-wrap col-md-12">
+                        <notification></notification>
+                        <h2> Programs</h2>
+                        <programs-list [programData]="schoolProfile.programDetail"></programs-list>
+                    </div>
+
+                    <!--Programs over-->
+                    <!--Event-->
+                    <div class="event-wrap col-md-12">
+                        <h2> Event</h2>
+                        <div class="col-md-12" *ngIf="schoolProfile.eventDetails;else message">
+                            <event-list [eventResult]="schoolProfile.eventDetails"></event-list>
+                        </div>
+                        <ng-template #message>There are no events scheduled at this time</ng-template>
+                    </div>
+
+
+                    <!--Event Over-->
+                    <!--video-->
+                    <video-list [links]="schoolProfile.programlink"></video-list>
+                    <!--video over-->
+                    <!--Articles-->
+                    <div class="articles-wrap col-md-12">
+                        <h2> Articles</h2>
+                        <article-items selectedTopic="" [schoolItemId]="schoolItemId" [configKey]="configKey" [headerTitle]="schoolProfile?.schoolDetail?.schoolDisplayName"></article-items>
+                    </div>
+                </div>
+                <!--Articles Over-->
+                <!--Overview-->
+                <!--Overview Over-->
+                <div class="col-md-3 overview-social-icon side-bar">
+                    <div class="col-md-12 side-bar-wrap">
+                        <social-media-icon [socialLinks]="schoolProfile.socialMediaLink"></social-media-icon>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-9 clearfix">
+            <div class="alert-p alert-p-info fade in">
+                <p> The information on this page has been provided to us, by the university, school, or program. For the latest updated information, please visit the school or program site directly. </p>
+            </div>
+        </div>
+    </div>
+
+</div>

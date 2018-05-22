@@ -1,0 +1,13 @@
+﻿<div *ngIf="product?.productShowAddToCart else viewDetails">
+    <div class="addToCart" *ngIf="product?.productAltAddToCartButtonLink else productSelect">
+        <button class="button-primary pull-left" (click)="redirectPage(product?.productAltAddToCartButtonText,product?.productAltAddToCartButtonLink)">{{product?.productAltAddToCartButtonText}}</button>
+    </div>
+    <ng-template #productSelect>
+        <add-to-cart configKey="shoppingCart" [qty]="qty" productId="{{product?.productId}}" [productFormat]="product?.productFormat" [selectButtonText]="product?.productAltAddToCartButtonText"></add-to-cart>       
+    </ng-template>
+</div>
+<ng-template #viewDetails>
+    <div class="addToCart" *ngIf="product?.productItemUrl">
+        <button class="button-primary pull-left" (click)="redirectPage('',product?.productItemUrl)">View Details</button>
+    </div>
+</ng-template>

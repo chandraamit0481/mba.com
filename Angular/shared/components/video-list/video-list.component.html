@@ -1,0 +1,14 @@
+﻿<div class="video-wrap col-md-12" *ngIf="videos && videos.length">
+    <h2>
+        Video
+
+        <span *ngIf="channel && channel.length">
+            <a role="link"  [href]="channel[0].programLinkUrl.value" class="video-youtube" target="_blank">More videos</a>
+        </span>
+    </h2>
+    <div class="row video-content-wrap">
+        <div class="col-md-4 col-xs-12" *ngFor="let videoItem of videos">
+            <div [innerHTML]="videoItem.safeHtml"></div>
+        </div>
+    </div>
+</div>

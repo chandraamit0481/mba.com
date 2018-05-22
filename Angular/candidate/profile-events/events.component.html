@@ -1,0 +1,21 @@
+﻿<h2 *ngIf="!isProfile;else profile">Saved Events</h2>
+<loader-component [loading]="isLoading" [errored]="errored"></loader-component>
+<ng-template #profile>
+    <h3>
+        Events
+        <a href="javascript:void(0);" class="viewsaved" role="link" [routerLink]="['/candidate-profile/events']" *ngIf="!!model">view all saved</a>
+    </h3>
+    <div>{{noEvent}}</div>
+</ng-template>
+
+<profile-event-content [model]="model?.recentEvent" [isProfile]="isProfile" [isRecentEvent]="true"></profile-event-content>
+<profile-event-content [model]="model?.restEvent" [isProfile]="isProfile" [isRecentEvent]="false"></profile-event-content>
+
+<div class="row grid-button-row">
+    <button class="button-link pull-right" role="link" [routerLink]="['/candidate-profile']" *ngIf="!isProfile">&lt; {{profileLabels?.backButtonText}}</button>
+</div> 
+
+
+
+
+       

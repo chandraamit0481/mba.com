@@ -1,0 +1,32 @@
+﻿<form [formGroup]='practiceQuestionForm'>
+    <div class="question">
+        <h3 name="rootParagraph" [innerHtml]="practiceQuestion?.questionParagraph | safeHtml"></h3>
+        <h3 name="rootQuestion" *ngIf="practiceQuestion?.questionParagraph !==practiceQuestion?.questionText" [innerHtml]="practiceQuestion?.questionText | safeHtml"></h3>
+        <div formArrayName="practiceAnswers">
+            <div class="option" *ngFor="let item of practiceQuestion?.questionOptionList;let i=index">
+                <input [value]="item.rowNum" [attr.name]="'answers'" formControlName="{{i}}" type="radio">
+                <label [innerHtml]="item?.questionOptionText | safeHtml"></label>
+            </div>
+        </div>
+        <div *ngIf="!practiceQuestionForm.controls['practiceAnswers'].valid && practiceQuestionForm.controls['practiceAnswers'].dirty">
+            <p id="pNoSelection" style="color: red;" *ngIf="practiceQuestionForm.controls['practiceAnswers'].hasError('isFailed')"> {{practiceConstant.msgPracticeQuestionValidation}}</p>
+        </div>
+        <br>
+        <button id="bAmIRight" *ngIf="!isSubmitted" (click)='submitPracticeAnswer()'><span>Am I Right?</span></button>
+        <div class="clear20"></div>
+        <div id="divAnswer" *ngIf="questionResponse?.isValidResponse">
+            <h2 *ngIf="questionResponse.isCorrectAnswered;then correct_block else incorrect_block"></h2>
+            <ng-template #correct_block><img src="/MBAWeb/assets/img/largecheckmark.jpg" alt="Correct" style="vertical-align: middle;"><span>Correct!!</span></ng-template>
+            <ng-template #incorrect_block><img src="/MBAWeb/assets/img/largecrossmark.jpg" alt="Incorrect" style="vertical-align: middle;"><span>Incorrect</span></ng-template>
+            <h3 style="font: bold 14px/18px Arial, Helvitica, sans-serif;">
+                You answered " {{practiceQuestion?.questionOptionList[questionResponse?.optionSelectedIndex]?.questionOptionText}} " and that's
+                <span id="sAnswer" *ngIf="questionResponse.isCorrectAnswered;else else_block">correct</span>
+                <ng-template #else_block>incorrect</ng-template> because:
+            </h3>
+            <p [innerHtml]="questionResponse.explanationText | safeHtml"></p>
+        </div>
+        <span style="color: red;" *ngIf="questionResponse && !questionResponse.isValidResponse">{{practiceConstant.msgError}}</span>
+        <br>
+        <a href="https://www.mba.com/service/testing/schedule-exam.aspx" class="arrow">Schedule a GMAT Appointment</a>
+    </div>
+</form>

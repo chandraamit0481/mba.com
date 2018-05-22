@@ -1,0 +1,17 @@
+﻿<h6>About You</h6>
+<div *ngIf="!isLoggedIn;else profile "><a class="profile-view" href="{{registrationUrl}}">Create a Profile</a></div>
+<ng-template #profile>
+    <a class="profile-view" href="{{redirectTo}}">Go to full Profile</a>
+</ng-template>
+<div class="control">
+    <div class="control-name">Years of Experience</div>
+    <input  aria-label="yearsOfExperience" type="text" id="yearsOfExperience" number-only [maxLen]="2" (keyup.enter)="onEnterKeyClick($event)" class="small" [(ngModel)]="fromProfile.programYearsWorkExperience" [disabled]="isLoggedIn" (change)="refreshData()">
+</div>
+<div class="control" title="To explore schools and programs in a different location, use the Where You Want to Go location search below.">
+    <div class="control-name">Where You Are</div>
+    <input aria-label="currentLocation" type="text" id="currentLocation" disabled="disabled" value="{{fromProfile?.programLocation}}">
+</div>
+<div class="control">
+    <div class="control-name">Target / Actual Score</div>
+    <input aria-label="score"  type="text" id="score" class="snug-btm"  number-only [maxLen]="3" (keyup.enter)="onEnterKeyClick($event)" [(ngModel)]="fromProfile.programGmatScore" (change)="refreshData()">
+</div>

@@ -1,0 +1,15 @@
+﻿<div class="important-dates col-md-12">
+    <h2> Important Dates</h2>
+    <div class="col-md-12" *ngIf="programRollingAdmissions"><p>{{notificationMessage}}</p></div>
+    <div class="col-md-12 important-dates-content">
+        <div class="row program-grid-heading"> 
+            <div class="col-md-3 col-xs-3">Start date</div>
+            <div class="col-md-3 col-xs-3">Application Deadlines </div>          
+         </div>
+        <div class="row grid-content" *ngFor="let item of programImportantDates" >
+            <div class="col-md-3 col-xs-3">{{item.programStartDate}} </div>       
+            <div class="col-md-3 col-xs-3">{{item.programApplicationDeadline}} </div>               
+        </div>  
+
+    </div>
+</div>
